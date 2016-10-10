@@ -3,6 +3,8 @@ var app = express();
 var router = express.Router();
 var path = __dirname + '/views/';
 
+
+
 //we have defined the Router middle layer, 
 //which will be executed before any other routes. 
 //This route will be used to print the type of HTTP request the particular Route is referring to.
@@ -18,6 +20,7 @@ router.get("/",function(req,res){
 
 //tell Express to use the Routes we have defined above.
 app.use("/",router);
+app.use(express.static(__dirname + '/public'));
 
 //we can assign the routes in order
 //so the last one will get executed when the incoming request is not matching any route. 
