@@ -1,111 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="MyApp">
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>TrafficMonitoring</title>
+	
+	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	<link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-	<div class="container" id="wholecontainer">
-	<div class="row">
-		<div class="wrapper">
-		<!-- sidebar -->
-    	    <div class="side-bar">
-                <ul>
-                    <li class="menu-head">
-                        Traffic Monitoring
-                    </li>
-                    <div class="menu">
-                        <li>
-                            <a href="#" class="active">Map<span class="glyphicon glyphicon-dashboard pull-right"></span></a>
-                        </li>
-                        <li>
-                            <a href="#">History <span class="glyphicon glyphicon-star pull-right"></span></a>
-                        </li>
-                        <li>
-                            <a href="#">Help <span class="glyphicon glyphicon-question-sign pull-right"></span></a>
-                        </li>
-                        
-                        <li>
-                            <a href="#">Contact <span class="glyphicon glyphicon-envelope pull-right"></span></a>
-                        </li>
-                    </div>
-                    
-                </ul>
-    	    </div>   
 
-            <div class="content">
-            <!-- map -->
-            <div class="col-md-9 col-sm-12 col-xs-12">
-	            	<div id ="map">
-	            		<img src="/images/mapholder.jpg">
-	            	</div>
-            </div>
-            <!-- form -->
-            <div class="col-md-3 col-sm-12 col-xs-12">
-            	<form class="form-horizontal" style="padding: 40px">
-					<div class="form-group">
-						<label for="origin">Origin:</label>
-					    <input class="form-control" id="origin" name="origin" placeholder="Origin" required="" type="text">
-					</div>
-					<div class="form-group">
-						<label for="destination">Destination:</label>
-					    <input class="form-control" id="destination" name="destination" placeholder="Destination" required="" type="text">
-					</div>
-					<div class="form-group">
-						<label for="time">Time:</label>
-						<select class="form-control" id="time" name="time">
-						  	<option>1</option>
-						  	<option>2</option>
-						  	<option>3</option>
-						  	<option>4</option>
-						  	<option>5</option>
-						  	<option>6</option>
-						  	<option>7</option>
-						  	<option>8</option>
-						  	<option>9</option>
-						  	<option>10</option>
-						  	<option>11</option>
-						  	<option>12</option>
-						  	<option>13</option>
-						  	<option>14</option>
-						  	<option>15</option>
-						  	<option>16</option>
-						  	<option>17</option>
-						  	<option>18</option>
-						  	<option>19</option>
-						  	<option>20</option>
-						  	<option>21</option>
-						  	<option>22</option>
-						  	<option>23</option>
-						  	<option>24</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="weather">Weather:</label>
-						<select class="form-control" id="weather" name="weather">
-						  	<option>Clear</option>
-						  	<option>Rainy</option>
-						  	<option>Foggy</option>
-						  	<option>Snowy</option>
-						  	<option>All</option>
-						</select>
-					</div>
-					<br>
-					<div class="form-group">
-					    <button class="btn btn-info pull-right">Submit</button>
-					</div>	
-      			</form>
-            </div>
-                
-        	</div>
-		</div>
-	</div>
-</div>
+	<!-- personalCSSfile -->
+	<link href="stylesheets/style.css" rel="stylesheet" type="text/css">
+	<link href="stylesheets/navbar.css" rel="stylesheet" type="text/css">
+	<link href="stylesheets/rotateFlower.css" rel="stylesheet" type="text/css">
+	<link href="stylesheets/contactStyle.css" rel="stylesheet" type="text/css">
+
+	<base href="/">
+</head>
+
+<body ng-controller="MainCtrl">
+<!-- side navbar -->
+		<nav id="slide-menu">
+	        <ul>
+	                    <li class="titlebrand">Traffic Monitoring</li>
+	                    <li>
+	                        <a href="/" class="active">Map<!-- <span class="glyphicon glyphicon-dashboard pull-right"></span> --></a>
+	                    </li>
+	                    <li>
+	                        <a href="/history">History <!-- <span class="glyphicon glyphicon-star pull-right"></span> --></a>
+	                    </li>
+	                    <li>
+	                        <a href="/help">Help <!-- <span class="glyphicon glyphicon-question-sign pull-right"></span> --></a>
+	                    </li>
+	                    <li>
+	                        <a href="/contact">Contact <!-- <span class="glyphicon glyphicon-envelope pull-right"></span> --></a>
+	                    </li>                    
+	        </ul>  
+		</nav>
+		<div id="main-content">
+	        <div class="menu-trigger">
+	        	<div class="glyphicon glyphicon-menu-hamburger"></div>
+	        </div>
+        	<!-- render templates according to different routes-->
+	        <ng-view></ng-view>
+	    </div>   
+
 	<!-- <script>
 	function initMap() {
 	  var mapOptions = {
@@ -117,9 +57,18 @@
 		var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	}
 	</script> -->
+
+	<!-- Bootstrap -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script src="/javascripts/toggleControl.js"></script>
+
+	<!-- AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	<script src="https://code.angularjs.org/1.4.5/angular-route.js"></script> 
+
+	<!-- personalJSfile -->
+    <script src="javascripts/app.js"></script>
+	<script src="javascripts/toggleControl.js"></script>
 	
 	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt75rHKFG_yvZG0DN5Ey_CuxS_2zbr208&callback=initMap"></script> -->
 </body>

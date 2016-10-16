@@ -1,0 +1,18 @@
+<div id="history"> <!-- ng-controller="HisCtrl" -->
+	<table class="table table-striped">
+	  <thead>
+	  	<th>Origin</th>
+	  	<th>Destination</th>
+	  	<th>Weather</th>
+	  	<th>Time</th>
+	  </thead>
+	  <tbody>
+	  	<tr ng-repeat="x in histories">
+	  		<td>{{x.ori}}</td>
+	  		<td>{{x.des}}</td>
+	  		<td>{{x.weather}}</td>
+	  		<td>{{x.time}}</td>
+	  	</tr>
+	  </tbody>
+	</table>
+</div>

@@ -6,7 +6,7 @@ var path = require("path");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 //var database = require(".data/database");
-var port     = process.env.PORT || 3000;         // set the port
+var port = process.env.PORT || 3000;         // set the port
 
 
 //mongoose.connect(database.url);     // connect to mongoDB database on modulus.io
@@ -20,6 +20,10 @@ app.use(methodOverride());
 
 // routes ===================================.===================================
 //require('./app/routes.js')(app);
+app.all('/*', function(req, res, next) {
+    // Just send the index.html for other files to support HTML5Mode
+    res.sendFile('index.html', { root: __dirname });
+});
 
 // listen (start app with node server.js) ======================================
 app.listen(port);
