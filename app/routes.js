@@ -36,7 +36,7 @@ module.exports = function(app) {
 // delete a history
     app.delete('/api/historys/:history_id', function(req, res) {
         History.remove({
-            _id : req.params.todo_id
+            _id : req.params.history_id
         }, function(err, history) {
             if (err)
                 res.send(err);

@@ -24,12 +24,12 @@ app.config(function($routeProvider, $locationProvider) {
 });
 
 //change "active" navbar-columns
-app.controller("MainCtrl", function($scope, $location) {
-  $scope.menuClass = function(page) {
-    var current = $location.path().substring(1);
-    console.log($scope.current);
-    return page === current ? "active" : "";
-  };
-  $scope.current = $location.path().substring(1);
+// app.controller("MainCtrl", function($scope, $location) {
+//   $scope.menuClass = function(page) {
+//     var current = $location.path().substring(1);
+//     console.log($scope.current);
+//     return page === current ? "active" : "";
+//   };
+//   $scope.current = $location.path().substring(1);
   
-});
+// });

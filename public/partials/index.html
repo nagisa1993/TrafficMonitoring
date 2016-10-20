@@ -10,11 +10,11 @@
             	<form class="form-horizontal" style="padding: 40px">
 					<div class="form-group">
 						<label for="origin">Origin:</label>
-					    <input class="form-control" id="origin" name="origin" placeholder="Origin" required="" type="text">
+					    <input class="form-control" id="origin" name="origin" placeholder="Origin" required="" type="text" ng-model="formData.ori">
 					</div>
 					<div class="form-group">
 						<label for="destination">Destination:</label>
-					    <input class="form-control" id="destination" name="destination" placeholder="Destination" required="" type="text">
+					    <input class="form-control" id="destination" name="destination" placeholder="Destination" required="" type="text" ng-model="formData.des">
 					</div>
 					<div class="form-group">
 						<label for="time">Time:</label>
@@ -56,7 +56,7 @@
 					</div>
 					<br>
 					<div class="form-group">
-					    <button class="btn btn-info pull-right">Submit</button>
+					    <button class="btn btn-info pull-right" ng-click="createquery()">Submit</button>
 					</div>	
       			</form>
             </div>
