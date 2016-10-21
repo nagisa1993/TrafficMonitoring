@@ -1,4 +1,4 @@
-var app = angular.module("MyApp", ['ngRoute']); //Remember to add ['ngRoute']!!!!!
+var app = angular.module("MyApp", ['ngRoute','uiGmapgoogle-maps','MainCtrl']); //Remember to add ['ngRoute']!!!!!
 
 app.config(function($routeProvider, $locationProvider) {
     //$locationProvider.hashPrefix('!');
@@ -23,13 +23,14 @@ app.config(function($routeProvider, $locationProvider) {
       $locationProvider.html5Mode(true);
 });
 
+
 //change "active" navbar-columns
-app.controller("MainCtrl", function($scope, $location) {
-  $scope.menuClass = function(page) {
-    var current = $location.path().substring(1);
-    console.log($scope.current);
-    return page === current ? "active" : "";
-  };
-  $scope.current = $location.path().substring(1);
-  
-});
+// app.controller("MainCtrl", function($scope, $location) {
+//   $scope.menuClass = function(page) {
+//     var current = $location.path().substring(1);
+//     console.log($scope.current);
+//     return page === current ? "active" : "";
+//   };
+//   $scope.current = $location.path().substring(1);
+//
+// });
