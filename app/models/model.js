@@ -6,8 +6,8 @@ var Schema      = mongoose.Schema;
 
 // Creates a Schema. This will be the basis of how user data is stored in the db
 var SearchHistory = new Schema({
-    ori:{type: String, required: true}, // [Long, Lat]
-    des: {type: String, required: true},
+    ori:{type: [Number], required: true}, // [Long, Lat]
+    des: {type: [Number], required: true},
     weather: String,
     time: Number,
     created_at: {type: Date, default: Date.now}
