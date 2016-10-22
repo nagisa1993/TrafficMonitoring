@@ -11,7 +11,7 @@
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0",
     "mongoose": "~4.6.3",
-    "method-override": "~2.3.6"
+    "method-override": "~2.3.6",
     "angular-google-maps": "~2.4.0"
   }
 }
