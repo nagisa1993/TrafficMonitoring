@@ -6,7 +6,7 @@ var mainCtrl = angular.module('MainCtrl', ['uiGmapgoogle-maps'])
     // Do stuff with your $scope.
     // Note: Some of the directives require at least something to be defined originally!
     // e.g. $scope.markers = []
-    $scope.master = {};
+    $scope.formData = {};
     // uiGmapGoogleMapApi is a promise.
     // The "then" callback function provides the google.maps object.
     $scope.map = {
@@ -43,16 +43,13 @@ var mainCtrl = angular.module('MainCtrl', ['uiGmapgoogle-maps'])
             }
         }
     };
-    $scope.update = function(formdata) {
-        $scope.master = angular.copy(formdata);
+    $scope.update = function() {
+        //$scope.master = angular.copy(formdata);
         // Saves the user data to the db
-        $http.post('/api/historys', formdata)
+        $http.post('/api/historys', $scope.formData)
             .success(function (data) {
                 // Once complete, clear the form (except location)
-                $scope.formData.ori = "";
-                $scope.formData.des = "";
-                $scope.formData.weather = "";
-                $scope.formData.time = "";
+                $scope.formData = {};
 
             })
             .error(function (data) {
