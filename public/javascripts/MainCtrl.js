@@ -1,7 +1,7 @@
 /**
  * Created by edward on 10/21/16.
  */
-var mainCtrl = angular.module('MainCtrl', ['uiGmapgoogle-maps'])
+var mainCtrl = angular.module('MainCtrl', ['uiGmapgoogle-maps']);
     mainCtrl.controller('MainCtrl', function($scope, $interval) {
     // Do stuff with your $scope.
     // Note: Some of the directives require at least something to be defined originally!

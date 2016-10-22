@@ -1,4 +1,8 @@
-var app = angular.module("MyApp", ['ngRoute','uiGmapgoogle-maps','MainCtrl']); //Remember to add ['ngRoute']!!!!!
+/**
+ * Created by mahaiyue on 10/16/16.
+ * Edited by edwards on 10/21/16.
+ */
+var app = angular.module("MyApp", ['ngRoute', 'uiGmapgoogle-maps', 'MainCtrl', 'HisCtrl']); //Remember to add ['ngRoute']!!!!!
 
 app.config(function($routeProvider, $locationProvider) {
     //$locationProvider.hashPrefix('!');

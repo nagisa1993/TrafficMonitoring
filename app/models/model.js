@@ -1,3 +1,6 @@
+/**
+ * Created by mahaiyue on 10/16/16.
+ */
 // Create MongoDB collections model
 
 // Pulls Mongoose dependency for creating schemas
@@ -6,8 +9,8 @@ var Schema      = mongoose.Schema;
 
 // Creates a Schema. This will be the basis of how user data is stored in the db
 var SearchHistory = new Schema({
-    ori:{type: [Number], required: true}, // [Long, Lat]
-    des: {type: [Number], required: true},
+    ori: String, //{type: [Number], required: true}, // [Long, Lat]
+    des: String, //{type: [Number], required: true},
     weather: String,
     time: Number,
     created_at: {type: Date, default: Date.now}

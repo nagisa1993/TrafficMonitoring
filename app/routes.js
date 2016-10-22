@@ -1,3 +1,6 @@
+/**
+ * Created by mahaiyue on 10/16/16.
+ */
 // Load the model
 var History = require('./models/model');
 
