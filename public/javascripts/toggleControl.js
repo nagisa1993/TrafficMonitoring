@@ -1,8 +1,11 @@
-$(document).ready(function(){
-    $(".side-bar").mouseleave(function(){
-         $(".wrapper").addClass("active");
-    });
-    $(".side-bar").mouseenter(function(){
-         $(".wrapper").removeClass("active");
-    });
-});
+(function() {
+	var $body = document.body
+	, $menu_trigger = $body.getElementsByClassName('menu-trigger')[0];
+
+	if ( typeof $menu_trigger !== 'undefined' ) {
+		$menu_trigger.addEventListener('click', function() {
+			$body.className = ( $body.className == 'menu-active' )? '' : 'menu-active';
+		});
+	}
+
+}).call(this);

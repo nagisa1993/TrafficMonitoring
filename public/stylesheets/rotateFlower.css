@@ -1,0 +1,402 @@
+/*source: https://dcrazed.com/css3-animation-examples/*/
+/*mahaiyue*/
+.mahaiyue {
+  /*position: absolute;*/
+	margin: auto;
+	top: 0; left: 0; bottom: 0; right: 0;  
+  width: 150px;
+  height: 150px;
+  padding: 0;
+  list-style: none;
+}
+
+.mahaiyue li {
+  position: absolute;
+  width: 150px ;
+  height: 150px ;
+  border-radius: 5px;
+  opacity: 0.8;
+}
+
+.mahaiyue li:nth-child(4){
+  background: #d6ffca;
+}
+
+.mahaiyue li:nth-child(1) {
+  background: #d6ffca;
+  animation:         rotation1 3s infinite;  
+  -o-animation:      rotation1 3s infinite;
+  -moz-animation:    rotation1 3s infinite;
+  -webkit-animation: rotation1 3s infinite;
+}
+
+.mahaiyue li:nth-child(2) {
+  background: #d6ffca;
+  animation:         rotation2 3s infinite;  
+  -o-animation:      rotation2 3s infinite;
+  -moz-animation:    rotation2 3s infinite;
+  -webkit-animation: rotation2 3s infinite;
+  animation-delay:         0.2s;
+	-o-animation-delay:      0.2s;
+	-moz-animation-delay:    0.2s;
+  -webkit-animation-delay: 0.2s;
+}
+
+.mahaiyue li:nth-child(3) {
+  background: #d6ffca;
+  animation:         rotation3 3s infinite;  
+  -o-animation:      rotation3 3s infinite;
+  -moz-animation:    rotation3 3s infinite;
+  -webkit-animation: rotation3 3s infinite;
+  animation-delay:         0.4s;
+	-o-animation-delay:      0.4s;
+	-ms-animation-delay:     0.4s;
+	-moz-animation-delay:    0.4s;
+  -webkit-animation-delay: 0.4s;
+}
+
+/*zhouyichen*/
+.zhouyichen {
+  /*position: absolute;*/
+	margin: auto;
+	top: 0; left: 0; bottom: 0; right: 0;  
+  width: 150px;
+  height: 150px;
+  padding: 0;
+  list-style: none;
+}
+
+.zhouyichen li {
+  position: absolute;
+  width: 150px ;
+  height: 150px ;
+  border-radius: 5px;
+  opacity: 0.8;
+}
+
+.zhouyichen li:nth-child(4){
+  background: #fad335;
+}
+
+.zhouyichen li:nth-child(1) {
+  background: #fad335;
+  animation:         rotation1 3s infinite;  
+  -o-animation:      rotation1 3s infinite;
+  -moz-animation:    rotation1 3s infinite;
+  -webkit-animation: rotation1 3s infinite;
+}
+
+.zhouyichen li:nth-child(2) {
+  background: #fad335;
+  animation:         rotation2 3s infinite;  
+  -o-animation:      rotation2 3s infinite;
+  -moz-animation:    rotation2 3s infinite;
+  -webkit-animation: rotation2 3s infinite;
+  animation-delay:         0.2s;
+	-o-animation-delay:      0.2s;
+	-moz-animation-delay:    0.2s;
+  -webkit-animation-delay: 0.2s;
+}
+
+.zhouyichen li:nth-child(3) {
+  background: #fad335;
+  animation:         rotation3 3s infinite;  
+  -o-animation:      rotation3 3s infinite;
+  -moz-animation:    rotation3 3s infinite;
+  -webkit-animation: rotation3 3s infinite;
+  animation-delay:         0.4s;
+	-o-animation-delay:      0.4s;
+	-ms-animation-delay:     0.4s;
+	-moz-animation-delay:    0.4s;
+  -webkit-animation-delay: 0.4s;
+}
+
+/*xusirun*/
+.xusirun {
+  /*position: absolute;*/
+  margin: auto;
+  top: 0; left: 0; bottom: 0; right: 0;  
+  width: 150px;
+  height: 150px;
+  padding: 0;
+  list-style: none;
+}
+
+.xusirun li {
+  position: absolute;
+  width: 150px ;
+  height: 150px ;
+  border-radius: 5px;
+  opacity: 0.8;
+}
+
+.xusirun li:nth-child(4){
+  background: #ffcad6;
+}
+
+.xusirun li:nth-child(1) {
+  background: #ffcad6;
+  animation:         rotation1 3s infinite;  
+  -o-animation:      rotation1 3s infinite;
+  -moz-animation:    rotation1 3s infinite;
+  -webkit-animation: rotation1 3s infinite;
+}
+
+.xusirun li:nth-child(2) {
+  background: #ffcad6;
+  animation:         rotation2 3s infinite;  
+  -o-animation:      rotation2 3s infinite;
+  -moz-animation:    rotation2 3s infinite;
+  -webkit-animation: rotation2 3s infinite;
+  animation-delay:         0.2s;
+  -o-animation-delay:      0.2s;
+  -moz-animation-delay:    0.2s;
+  -webkit-animation-delay: 0.2s;
+}
+
+.xusirun li:nth-child(3) {
+  background: #ffcad6;
+  animation:         rotation3 3s infinite;  
+  -o-animation:      rotation3 3s infinite;
+  -moz-animation:    rotation3 3s infinite;
+  -webkit-animation: rotation3 3s infinite;
+  animation-delay:         0.4s;
+  -o-animation-delay:      0.4s;
+  -ms-animation-delay:     0.4s;
+  -moz-animation-delay:    0.4s;
+  -webkit-animation-delay: 0.4s;
+}
+
+/*liqi*/
+.liqi {
+  /*position: absolute;*/
+  margin: auto;
+  top: 0; left: 0; bottom: 0; right: 0;  
+  width: 150px;
+  height: 150px;
+  padding: 0;
+  list-style: none;
+}
+
+.liqi li {
+  position: absolute;
+  width: 150px ;
+  height: 150px ;
+  border-radius: 5px;
+  opacity: 0.8;
+}
+
+.liqi li:nth-child(4){
+  background: #cad6ff;
+}
+
+.liqi li:nth-child(1) {
+  background: #cad6ff;
+  animation:         rotation1 3s infinite;  
+  -o-animation:      rotation1 3s infinite;
+  -moz-animation:    rotation1 3s infinite;
+  -webkit-animation: rotation1 3s infinite;
+}
+
+.liqi li:nth-child(2) {
+  background: #cad6ff;
+  animation:         rotation2 3s infinite;  
+  -o-animation:      rotation2 3s infinite;
+  -moz-animation:    rotation2 3s infinite;
+  -webkit-animation: rotation2 3s infinite;
+  animation-delay:         0.2s;
+  -o-animation-delay:      0.2s;
+  -moz-animation-delay:    0.2s;
+  -webkit-animation-delay: 0.2s;
+}
+
+.liqi li:nth-child(3) {
+  background: #cad6ff;
+  animation:         rotation3 3s infinite;  
+  -o-animation:      rotation3 3s infinite;
+  -moz-animation:    rotation3 3s infinite;
+  -webkit-animation: rotation3 3s infinite;
+  animation-delay:         0.4s;
+  -o-animation-delay:      0.4s;
+  -ms-animation-delay:     0.4s;
+  -moz-animation-delay:    0.4s;
+  -webkit-animation-delay: 0.4s;
+}
+
+/*wangshi*/
+.wangshi {
+  /*position: absolute;*/
+  margin: auto;
+  top: 0; left: 0; bottom: 0; right: 0;  
+  width: 150px;
+  height: 150px;
+  padding: 0;
+  list-style: none;
+}
+
+.wangshi li {
+  position: absolute;
+  width: 150px ;
+  height: 150px ;
+  border-radius: 5px;
+  opacity: 0.8;
+}
+
+.wangshi li:nth-child(4){
+  background: #F8C4DC;
+}
+
+.wangshi li:nth-child(1) {
+  background: #F8C4DC;
+  animation:         rotation1 3s infinite;  
+  -o-animation:      rotation1 3s infinite;
+  -moz-animation:    rotation1 3s infinite;
+  -webkit-animation: rotation1 3s infinite;
+}
+
+.wangshi li:nth-child(2) {
+  background: #F8C4DC;
+  animation:         rotation2 3s infinite;  
+  -o-animation:      rotation2 3s infinite;
+  -moz-animation:    rotation2 3s infinite;
+  -webkit-animation: rotation2 3s infinite;
+  animation-delay:         0.2s;
+  -o-animation-delay:      0.2s;
+  -moz-animation-delay:    0.2s;
+  -webkit-animation-delay: 0.2s;
+}
+
+.wangshi li:nth-child(3) {
+  background: #F8C4DC;
+  animation:         rotation3 3s infinite;  
+  -o-animation:      rotation3 3s infinite;
+  -moz-animation:    rotation3 3s infinite;
+  -webkit-animation: rotation3 3s infinite;
+  animation-delay:         0.4s;
+  -o-animation-delay:      0.4s;
+  -ms-animation-delay:     0.4s;
+  -moz-animation-delay:    0.4s;
+  -webkit-animation-delay: 0.4s;
+}
+
+/*luyao*/
+.luyao {
+  /*position: absolute;*/
+  margin: auto;
+  top: 0; left: 0; bottom: 0; right: 0;  
+  width: 150px;
+  height: 150px;
+  padding: 0;
+  list-style: none;
+}
+
+.luyao li {
+  position: absolute;
+  width: 150px ;
+  height: 150px ;
+  border-radius: 5px;
+  opacity: 0.8;
+}
+
+.luyao li:nth-child(4){
+  background: #5BC0DE;
+}
+
+.luyao li:nth-child(1) {
+  background: #5BC0DE;
+  animation:         rotation1 3s infinite;  
+  -o-animation:      rotation1 3s infinite;
+  -moz-animation:    rotation1 3s infinite;
+  -webkit-animation: rotation1 3s infinite;
+}
+
+.luyao li:nth-child(2) {
+  background: #5BC0DE;
+  animation:         rotation2 3s infinite;  
+  -o-animation:      rotation2 3s infinite;
+  -moz-animation:    rotation2 3s infinite;
+  -webkit-animation: rotation2 3s infinite;
+  animation-delay:         0.2s;
+  -o-animation-delay:      0.2s;
+  -moz-animation-delay:    0.2s;
+  -webkit-animation-delay: 0.2s;
+}
+
+.luyao li:nth-child(3) {
+  background: #5BC0DE;
+  animation:         rotation3 3s infinite;  
+  -o-animation:      rotation3 3s infinite;
+  -moz-animation:    rotation3 3s infinite;
+  -webkit-animation: rotation3 3s infinite;
+  animation-delay:         0.4s;
+  -o-animation-delay:      0.4s;
+  -ms-animation-delay:     0.4s;
+  -moz-animation-delay:    0.4s;
+  -webkit-animation-delay: 0.4s;
+}
+
+/* first rotation */
+@keyframes rotation1 {
+	from     { transform:rotate(-360deg); }
+  30%,60%  { transform:rotate(20deg); }
+  80%      { transform:rotate(0); }
+}
+@-o-keyframes rotation1 {
+	from     { -o-transform:rotate(-360deg); }
+  30%,60%  { -o-transform:rotate(20deg); }
+  80%      { -o-transform:rotate(0); }
+}
+@-moz-keyframes rotation1 {
+	from     { -moz-transform:rotate(-360deg); }
+  30%,60%  { -moz-transform:rotate(20deg); }
+  80%      { -moz-transform:rotate(0); }
+}
+@-webkit-keyframes rotation1 {
+	from     { -webkit-transform:rotate(-360deg); }
+  30%,60%  { -webkit-transform:rotate(20deg); }
+  80%      { -webkit-transform:rotate(0); }
+}
+
+/* second rotation */
+@keyframes rotation2 {
+	from     { transform:rotate(-360deg); }
+  30%, 60% { transform:rotate(45deg); }
+  80%      { transform:rotate(0); }
+}
+@-o-keyframes rotation2 {
+	from     { -o-transform:rotate(-360deg); }
+  30%, 60% { -o-transform:rotate(45deg); }
+  80%      { -o-transform:rotate(0); }
+}
+@-moz-keyframes rotation2 {
+	from     { -moz-transform:rotate(-360deg); }
+  30%, 60% { -moz-transform:rotate(45deg); }
+  80%      { -moz-transform:rotate(0); }
+}
+@-webkit-keyframes rotation2 {
+	from     { -webkit-transform:rotate(-360deg); }
+  30%, 60% { -webkit-transform:rotate(45deg); }
+  80%      { -webkit-transform:rotate(0); }
+}
+
+/* third rotation */
+@keyframes rotation3 {
+	from    { transform:rotate(-360deg); }
+  30%,60% { transform:rotate(75deg); }
+  80%     { transform:rotate(0); }
+}
+@-o-keyframes rotation3 {
+	from    { -o-transform:rotate(-360deg); }
+  30%,60% { -o-transform:rotate(75deg); }
+  80%     { -o-transform:rotate(0); }
+}
+@-moz-keyframes rotation3 {
+	from    { -moz-transform:rotate(-360deg); }
+  30%,60% { -moz-transform:rotate(75deg); }
+  80%     { -moz-transform:rotate(0); }
+}
+@-webkit-keyframes rotation3 {
+	from    { -webkit-transform:rotate(-360deg); }
+  30%,60% { -webkit-transform:rotate(75deg); }
+  80%     { -webkit-transform:rotate(0); }
+}
