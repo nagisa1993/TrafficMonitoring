@@ -1,12 +1,36 @@
 /**
  * Created by edward on 10/21/16.
+ * Edit-contributer mahaiyue.
  */
-var mainCtrl = angular.module('MainCtrl', ['uiGmapgoogle-maps']);
+var mainCtrl = angular.module('MainCtrl', ['uiGmapgoogle-maps', 'chart.js']);
+
+mainCtrl.config(['ChartJsProvider', function (ChartJsProvider) {
+    // Configure all charts
+    ChartJsProvider.setOptions({
+      tooltipFillColor: '#EEE',
+      tooltipFontColor: '#000',
+      tooltipFontSize: 12,
+      tooltipCornerRadius: 3,
+      responsive: true
+    });
+  }]);
+
 mainCtrl.controller('MainCtrl', function($scope, $http, $log, $timeout, uiGmapGoogleMapApi, uiGmapIsReady) {
     // Do stuff with your $scope.
     // Note: Some of the directives require at least something to be defined originally!
     // e.g. $scope.markers = []
     $scope.formData = {};
+/*-------------------------------------------------------------------------------------------------------*/
+/*                                          Draw chart                                                   */
+/*-------------------------------------------------------------------------------------------------------*/
+    // After obtaining traffic data from db, draw 2 line charts
+    $scope.labels1 = ['0', '2:30', '5:00', '7:30', '10:00', '12:30', '15:00', '17:30', '20:00', '22:30'];
+    $scope.chartdata1 = [[0,0,0,0,0,0,0,0,0,0]];
+    $scope.labels2 = ['0', '2:30', '5:00', '7:30', '10:00', '12:30', '15:00', '17:30', '20:00', '22:30'];
+    $scope.chartdata2 = [[0,0,0,0,0,0,0,0,0,0]];
+/*-------------------------------------------------------------------------------------------------------*/
+/*                                          Draw map                                                     */
+/*-------------------------------------------------------------------------------------------------------*/
     $scope.map = {
         center: {
             latitude: 40.523325,
@@ -66,7 +90,9 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, $timeout, uiGmapGo
                 $scope.directionsDisplay.setMap(inst.maps); // if only 1 map it's found at index 0 of array
             });
     });
-
+/*-------------------------------------------------------------------------------------------------------*/
+/*                                          Form Controller                                              */
+/*-------------------------------------------------------------------------------------------------------*/
     $scope.update = function() {
         // console.log($scope.ori_detail.name);
         // console.log($scope.des_detail.name);
@@ -108,8 +134,9 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, $timeout, uiGmapGo
         $scope.formData = {};
     }
 });
-
-
+/*-------------------------------------------------------------------------------------------------------*/
+/*                                          Address Autocomplete                                         */
+/*-------------------------------------------------------------------------------------------------------*/
 mainCtrl.directive('googleplace',function(){
     return {
         require: 'ngModel',

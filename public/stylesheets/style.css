@@ -5,6 +5,11 @@ body, html {
     font-family: helvetica;
     font-weight: 100;
 }
+
 .angular-google-map-container {
     height: 400px;
+}
+
+.row{
+    padding: 30px;
 }

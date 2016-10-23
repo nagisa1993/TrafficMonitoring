@@ -30,6 +30,9 @@
 	            <li>
 	                <a href="/history">History <!-- <span class="glyphicon glyphicon-star pull-right"></span> --></a>
 	            </li>
+				<li>
+					<a href="/hotspot">Hotspot </a>
+				</li>
 	            <li>
 	                <a href="/help">Help <!-- <span class="glyphicon glyphicon-question-sign pull-right"></span> --></a>
 	            </li>
@@ -46,23 +49,13 @@
 	        <ng-view></ng-view>
 	    </div>   
 
-	<!-- <script>
-	function initMap() {
-	  var mapOptions = {
-		//format in JSON
-		center: new google.maps.LatLng(39.833851, -74.871826),
-		zoom: 10,
-		//mapTypeId: google.maps.MapTypeId.TERRAIN
-		}
-		var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-	}
-	</script> -->
 	<!-- Bootstrap -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
 	<!-- AngularJS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	<!--<script src="angular/angular.min.js"></script>-->
 	<script src="https://code.angularjs.org/1.4.5/angular-route.js"></script>
 	
 	<!-- personalJSfile -->
@@ -70,13 +63,16 @@
 	<script src="javascripts/toggleControl.js"></script>
 	<script src="javascripts/MainCtrl.js"></script>
 	<script src="javascripts/HisCtrl.js"></script>
+	<script src="javascripts/HspCtrl.js"></script>
 
 	<!-- Google Maps API -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiZIShFf_a93mqFiEJ4jSlkr4apswao-g&libraries=places"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
 	<script src="//rawgit.com/angular-ui/angular-google-maps/2.1.5/dist/angular-google-maps.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
-	<!--&lt;!&ndash; JS files &ndash;&gt;-->
-	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt75rHKFG_yvZG0DN5Ey_CuxS_2zbr208&callback=initMap"></script> -->
+	
+	<!--Angular-Chart-->
+	<script src="chart.js/dist/Chart.min.js"></script>
+	<script src="angular-chart.js/dist/angular-chart.min.js"></script>
 </body>
 </html>

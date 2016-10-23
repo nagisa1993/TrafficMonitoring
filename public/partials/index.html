@@ -1,6 +1,7 @@
 <!--Created by mahaiyue on 10/10/16.-->
  
 <div class="content">
+	<div class="row">
             <!-- map -->
             <div class="col-md-8 col-sm-12 col-xs-12">
 				<div id="map">
@@ -54,7 +55,6 @@
 						  	<option>24</option>
 						</select>
 					</div>
-					<pre>formData = {{formData | json}}</pre>
 					<div class="form-group">
 						<label for="weather">Weather:</label>
 						<select class="form-control" id="weather" name="weather" ng-model="formData.weather">
@@ -65,9 +65,21 @@
 						</select>
 					</div>
 					<br>
-					<div class="form-group">
-					    <button class="btn btn-info pull-right" ng-click="update()">Submit</button>
+					<div class="form-group pull-right">
+						<button class="btn btn-default" ng-click="reset()">Reset</button>
+					    <button class="btn btn-info" ng-click="update()">Submit</button>
 					</div>	
       			</form>
             </div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-xs-12">
+			<label style="padding-bottom:5px">Traffic pattern along the specific route:</label>
+			<canvas class="chart chart-line" chart-data="chartdata1" chart-labels="labels1"></canvas> 
+		</div>
+		<div class="col-md-6 col-xs-12">
+			<label style="padding-bottom:5px">Traffic pattern for selected location: {{pin.location}}</label>
+			<canvas class="chart chart-line" chart-data="chartdata2" chart-labels="labels2"></canvas>
+		</div>
+	</div>
 </div>

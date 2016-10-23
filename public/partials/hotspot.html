@@ -1,0 +1,78 @@
+<!--Created by mahaiyue on 10/22/16.-->
+
+<div class="content">
+	<div class="row">
+            <!-- map -->
+            <div class="col-md-8 col-sm-12 col-xs-12">
+				<div id="map">
+					<ui-gmap-google-map center='map.center' zoom='map.zoom' id='maps'>
+						<ui-gmap-marker
+								coords="marker.coords"
+								options="marker.options"
+								events="marker.events"
+								idkey="marker.id">
+						</ui-gmap-marker>
+					</ui-gmap-google-map>
+				</div>
+            </div>
+            <!-- form -->
+            <div class="col-md-4 col-sm-12 col-xs-12">
+            	<form class="form-horizontal" style="padding: 40px">
+					<div class="form-group">
+                        <label>Day:</label><br>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" ng-model="formData.day">Weekday
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" ng-model="formData.day">Weekend
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" ng-model="formData.day">All
+                        </label>
+					</div>
+					<div class="form-group">
+						<label>Weather:</label><br>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" ng-model="formData.weather">Clear
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" ng-model="formData.weather">Rain
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" ng-model="formData.weather">Fog
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" ng-model="formData.weather">Snow
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" ng-model="formData.weather">All
+                        </label>
+					</div>
+					<div class="form-group">
+						<label>Severity:</label><br>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" ng-model="formData.severity">Critical
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" ng-model="formData.severity">All
+                        </label>
+					</div>
+					<br>
+					<div class="form-group pull-right">
+						<button class="btn btn-default" ng-click="reset()">Reset</button>
+					    <button class="btn btn-info" ng-click="update()">Submit</button>
+					</div>	
+      			</form>
+            </div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-xs-12">
+			<label style="padding-bottom:5px">Traffic pattern for all locations:</label>
+			<canvas class="chart chart-line" chart-data="chartdata1" chart-labels="labels1"></canvas> 
+		</div>
+		<div class="col-md-6 col-xs-12">
+			<label style="padding-bottom:5px">Traffic pattern for selected location: {{pin.location}}</label>
+			<canvas class="chart chart-line" chart-data="chartdata2" chart-labels="labels2"></canvas>
+		</div>
+	</div>
+</div>
