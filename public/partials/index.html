@@ -4,7 +4,7 @@
             <!-- map -->
             <div class="col-md-8 col-sm-12 col-xs-12">
 				<div id="map">
-					<ui-gmap-google-map center='map.center' zoom='map.zoom'>
+					<ui-gmap-google-map center='map.center' zoom='map.zoom' id='maps'>
 						<ui-gmap-marker
 								coords="marker.coords"
 								options="marker.options"
@@ -19,11 +19,11 @@
             	<form class="form-horizontal" style="padding: 40px">
 					<div class="form-group">
 						<label for="origin">Origin:</label>
-					    <input class="form-control" id="origin" name="origin" placeholder="Origin" required="" type="text" ng-model="formData.ori">
+					    <input class="form-control" id="origin" name="origin" placeholder="Origin" required="" type="text" ng-model="formData.ori" googleplace/>
 					</div>
 					<div class="form-group">
 						<label for="destination">Destination:</label>
-					    <input class="form-control" id="destination" name="destination" placeholder="Destination" required="" type="text" ng-model="formData.des">
+					    <input class="form-control" id="destination" name="destination" placeholder="Destination" required="" type="text" ng-model="formData.des" googleplace/>
 					</div>
 					<div class="form-group">
 						<label for="time">Time:</label>
