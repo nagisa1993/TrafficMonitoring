@@ -12,6 +12,7 @@ var port = process.env.PORT || 3000;         // set the port
 
 mongoose.connect(database.url);     // connect to mongoDB database on modulus.io
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/node_modules'));
 app.use(logger('dev'));
 app.use(bodyParser.json());   // parse application/json
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));  // parse application/x-www-form-urlencoded

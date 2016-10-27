@@ -3,17 +3,17 @@
  */
 var hisCtrl = angular.module('HisCtrl', []);
 hisCtrl.controller('HisCtrl', function($scope, $http){
-    // when landing on the page, get all histories and show them
+    // when landing on the page, get all searching histories and show them
     $http.get('/api/historys')
         .success(function(data) {
             $scope.historys = data;
-            console.log(data);
+            //console.log(data);
         })
         .error(function(data) {
             console.log('Error: ' + data);
         });
 
-    // delete a history after checking it
+    // delete a history
     $scope.deleteHistory = function(id) {
         $http.delete('/api/historys/' + id)
             .success(function(data) {
