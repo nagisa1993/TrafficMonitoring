@@ -22,6 +22,8 @@ SearchHistory.pre('save', function(next){
     next();
 });
 
+
+
 // Indexes this schema in 2dsphere format (critical for running proximity searches)
 //SearchHistory.index({location: '2dsphere'});
 

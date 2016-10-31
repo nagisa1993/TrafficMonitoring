@@ -3,6 +3,7 @@
  */
 // Load the model
 var History = require('./models/model');
+var Incidents = require('./models/incidents');
 
 // Opens App routes RESTful design
 module.exports = function(app) {
@@ -51,6 +52,30 @@ module.exports = function(app) {
 
                 res.json(historys);
             });
+        });
+    });
+
+    // get all incidents
+    app.get('/api/incidents', function(req, res) {
+        // use mongoose to get all histories in the database
+        Incidents.find(function(err, incidents) {
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err)
+                res.send(err);
+
+            res.json(incidents); // return all histories in JSON format
+        });
+    });
+
+    // create history and send back all histories after creation
+    app.post('/api/incidents', function(req, res) {
+        // create a incidents
+        var newincidents = new Incidents(req.body);
+        newincidents.save(function(err){
+            if(err)
+                res.send(err);
+
+            res.json(req.body);
         });
     });
 };

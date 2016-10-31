@@ -20,6 +20,82 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, $timeout, uiGmapGo
     // Note: Some of the directives require at least something to be defined originally!
     // e.g. $scope.markers = []
     $scope.formData = {};
+
+    // var geocodeRequest = "http://dev.virtualearth.net/REST/v1/Traffic/Incidents/37,-105,45,-94?key=Aski4bckJ0njTKhPccFX4APdYOe6AXI8_65EC2WrAWTT0ntUgIuQiRStrmkrwzQW&jsonp=JSON_CALLBACK";
+    // function CallRestService(request, callback) {
+    //     $http.jsonp(request)
+    //         .success(function (r) {
+    //             callback(r);
+    //         })
+    //         .error(function (data, status, error, thing) {
+    //             alert(error);
+    //         });
+    // };
+    //
+    // CallRestService(geocodeRequest, GeocodeCallback);
+    //
+    // function GeocodeCallback(result) {
+    //     // var rawdata = JSON.stringify(result);
+    //     // console.log(rawdata);
+    //     var rawincidents = result;
+    //     // console.log(rawincidents);
+    //     $scope.incidents = [];
+    //     angular.forEach(result.resourceSets[0].resources, function (item) {
+    //         var newincident = {
+    //             "location": {
+    //                 "Lat": item.point.coordinates[0],
+    //                 "Lng": item.point.coordinates[1]
+    //             },
+    //             // do slicing and get millisecond integer
+    //             "start": millToUTC(parseInt(item.start.substring(6,item.start.length-2))),
+    //             "end": millToUTC(parseInt(item.end.substring(6,item.end.length-2))),
+    //             "severity": item.severity
+    //         }
+    //         console.log(newincident);
+    //         $scope.incidents.push(newincident);
+            // $http.post('/api/incidents', newincident)
+            //     .success(function (data) {
+            //         // Once complete, clear the form (except location)
+            //     })
+            //     .error(function (data) {
+            //         console.log('Error: ' + data);
+            //     });
+        // });
+        // console.log(JSON.stringify($scope.incidents));
+    // };
+
+
+
+    // function millToUTC(millseconds) {
+    //     var oneSecond = 1000;
+    //     var oneMinute = oneSecond * 60;
+    //     var oneHour = oneMinute * 60;
+    //     var oneDay = oneHour * 24;
+    //
+    //     var seconds = Math.floor((millseconds % oneMinute) / oneSecond);
+    //     var minutes = Math.floor((millseconds % oneHour) / oneMinute);
+    //     var hours = Math.floor((millseconds % oneDay) / oneHour);
+    //     var days = Math.floor(millseconds / oneDay);
+    //
+    //     var timeString = '';
+    //     if (days !== 0) {
+    //         timeString += (days !== 1) ? (days + ' days ') : (days + ' day ');
+    //     }
+    //     if (hours !== 0) {
+    //         timeString += (hours !== 1) ? (hours + ' hours ') : (hours + ' hour ');
+    //     }
+    //     if (minutes !== 0) {
+    //         timeString += (minutes !== 1) ? (minutes + ' minutes ') : (minutes + ' minute ');
+    //     }
+    //     if (seconds !== 0 || millseconds < 1000) {
+    //         timeString += (seconds !== 1) ? (seconds + ' seconds ') : (seconds + ' second ');
+    //     }
+    //
+    //     return timeString;
+    // };
+
+
+
 /*-------------------------------------------------------------------------------------------------------*/
 /*                                          Draw chart                                                   */
 /*-------------------------------------------------------------------------------------------------------*/
@@ -103,7 +179,7 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, $timeout, uiGmapGo
             optimizeWaypoints: true
         }
         $scope.directionsDisplay.setMap($scope.maps);
-        $scope.directionsService.route(request, function(response, status) {
+        $scope.directionsService.route(request, function (response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 $scope.directionsDisplay.setDirections(response);
                 // for (var i = 0, len = response.routes.length; i < len; i++) {
@@ -128,6 +204,7 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, $timeout, uiGmapGo
             .error(function (data) {
                 console.log('Error: ' + data);
             });
+
     };
 
     $scope.reset = function() {
