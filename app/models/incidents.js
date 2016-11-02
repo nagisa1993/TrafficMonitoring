@@ -5,13 +5,19 @@ var mongoose    = require('mongoose');
 var Schema      = mongoose.Schema;
 // Creates a Schema. This will be the basis of how user data is stored in the db
 var TrafficIncidents = new Schema({
+    id : Number,
     location:{
-        Lat: Number,
-        Lng: Number
+        lat: Number,
+        lng: Number
     },
-    start: Number,
-    end: Number,
+    type: String,
     severity: Number,
+    startTime: String,
+    endTime: String,
+    roadName : String,
+    fromLocation : String,
+    toLocation : String,
+    description : String,
     created_at: {type: Date, default: Date.now}
 });
 
@@ -22,4 +28,4 @@ TrafficIncidents.pre('save', function(next){
     }
     next();
 });
-module.exports =  mongoose.model('Incidents', TrafficIncidents)
+module.exports =  mongoose.model('Incidents', TrafficIncidents);
