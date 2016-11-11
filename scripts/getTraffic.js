@@ -61,6 +61,7 @@ function run() {
                     "fromLocation": raw_incidents[i].parameterizedDescription.fromLocation,
                     "toLocation": raw_incidents[i].parameterizedDescription.toLocation,
                     "description": raw_incidents[i].shortDesc,
+                    "delayFromTypical": raw_incidents[i].delayFromTypical
                 });
                 newincident.save(function (err) {
                     if (err) {

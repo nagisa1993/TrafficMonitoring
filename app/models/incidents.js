@@ -18,6 +18,7 @@ var TrafficIncidents = new Schema({
     fromLocation : String,
     toLocation : String,
     description : String,
+    delayFromTypical : Number,
     created_at: {type: Date, default: Date.now}
 });
 
