@@ -4,7 +4,6 @@
 	  <thead>
 	  	<th>Origin</th>
 	  	<th>Destination</th>
-	  	<th>Weather</th>
 	  	<th style="text-align: center">Time</th>
 		<th style="text-align: center">Delete</th>
 	  </thead>
@@ -12,7 +11,6 @@
 	  	<tr ng-repeat="x in historys">
 	  		<td>{{x.ori}}</td>
 	  		<td>{{x.des}}</td>
-	  		<td>{{x.weather}}</td>
 	  		<td style="text-align: center">{{x.time}}</td>
 			<td style="text-align: center"><span class="glyphicon glyphicon-remove" ng-click="deleteHistory(x._id)"></span></td>
 	  	</tr>

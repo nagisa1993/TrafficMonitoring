@@ -8,6 +8,7 @@ var Weather = new Schema({
     name: String,
     weather: String,
     Time: String,
+    Date: String,
     location:{
         lat: Number,
         lng: Number

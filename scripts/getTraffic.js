@@ -7,7 +7,7 @@ var database = require("../data/database");
 var Incidents = require("../app/models/incidents");
 mongoose.connect(database.url);
 function run() {
-    var url = "http://www.mapquestapi.com/traffic/v2/incidents?key=wkilOhM298GvH1ENiJhLdHOVwmb2tjgX&callback=handleIncidentsResponse&boundingBox=40.704739,-74.717459,40.287012,-74.168143&filters=construction,incidents&inFormat=kvp&outFormat=j"
+    var url = "http://www.mapquestapi.com/traffic/v2/incidents?key=wkilOhM298GvH1ENiJhLdHOVwmb2tjgX&callback=handleIncidentsResponse&boundingBox=40.704739,-74.717459,40.287012,-74.168143&filters=construction,incidents,event,congestion&inFormat=kvp&outFormat=j"
 // get is a simple wrapper for request()
 // which sets the http method to GET
     var request = http.get(url, function (response) {
@@ -60,7 +60,8 @@ function run() {
                     "roadName": raw_incidents[i].parameterizedDescription.roadName,
                     "fromLocation": raw_incidents[i].parameterizedDescription.fromLocation,
                     "toLocation": raw_incidents[i].parameterizedDescription.toLocation,
-                    "description": raw_incidents[i].parameterizedDescription.eventText,
+                    "description": raw_incidents[i].shortDesc,
+                    "delayFromTypical": raw_incidents[i].delayFromTypical
                 });
                 newincident.save(function (err) {
                     if (err) {

@@ -10,7 +10,9 @@ var Weathers = require('./models/weather');
 module.exports = function(app) {
 
     // api ---------------------------------------------------------------------
-
+    /**************************************************************************/
+    /**                               History                                **/
+    /**************************************************************************/
     // get all histories
     app.get('/api/historys', function(req, res) {
 
@@ -56,6 +58,9 @@ module.exports = function(app) {
         });
     });
 
+    /**************************************************************************/
+    /**                              Incident                                **/
+    /**************************************************************************/
     // get all incidents
     app.get('/api/incidents', function(req, res) {
         // use mongoose to get all incidents in the database
@@ -63,8 +68,7 @@ module.exports = function(app) {
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err)
                 res.send(err);
-
-            res.json(incidents); // return all histories in JSON format
+            res.json(incidents); // return all incidents in JSON format
         });
     });
 
@@ -75,11 +79,13 @@ module.exports = function(app) {
         newincidents.save(function(err){
             if(err)
                 res.send(err);
-
             res.json(req.body);
         });
     });
 
+    /**************************************************************************/
+    /**                               Weather                                **/
+    /**************************************************************************/
     // get all weathers
     app.get('/api/weathers', function(req, res) {
         // use mongoose to get all weathers in the database
@@ -88,7 +94,7 @@ module.exports = function(app) {
             if (err)
                 res.send(err);
 
-            res.json(incidents); // return all histories in JSON format
+            res.json(incidents); // return all incidents in JSON format
         });
     });
 

@@ -17,7 +17,7 @@ function getWeather(){
     var cur_hour = time.getHours(),
         cur_minute = time.getMinutes();
     // console.log("time: ", time.getHours(), " : ", time.getMinutes(), "weather: ", weather);
-    if(weather === undefined || dict[cur_hour] <= cur_minute && cur_minute <= dict[cur_hour] + 2) {
+    if(weather === undefined || (dict[cur_hour] <= cur_minute)) {
         hour = cur_hour;
         minute = dict[cur_hour];
         var url = "http://api.openweathermap.org/data/2.5/group?id=5101717,5097598,5102922,5102578,5098124&units=metric&APPID=0cbf506d7c01ff59f3f92d8f97778e26";
@@ -37,6 +37,7 @@ function getWeather(){
                         "name" : list[i].name,
                         "weather" : list[i].weather[0].main,
                         "Time" : roundTime(cur_hour,cur_minute),
+                        "Date" : time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDate(),
                         "location" :{
                             "lat": list[i].coord.lat,
                             "lng": list[i].coord.lon
@@ -65,6 +66,6 @@ function roundTime(hr, min){
 }
 function run(){
     weather = getWeather();
-    setTimeout(run, 10000000);
+    setTimeout(run, 3600000);
 }
 run();
