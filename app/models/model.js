@@ -8,7 +8,6 @@ var Schema      = mongoose.Schema;
 var SearchHistory = new Schema({
     ori:{type: String, required: true}, // [Long, Lat]
     des: {type: String, required: true},
-    weather: String,
     time: Number,
     created_at: {type: Date, default: Date.now}
 });

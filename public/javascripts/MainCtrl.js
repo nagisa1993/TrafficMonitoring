@@ -100,10 +100,63 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, $timeout, uiGmapGo
 /*                                          Draw chart                                                   */
 /*-------------------------------------------------------------------------------------------------------*/
     // After obtaining traffic data from db, draw 2 line charts
-    $scope.labels1 = ['0', '2:30', '5:00', '7:30', '10:00', '12:30', '15:00', '17:30', '20:00', '22:30'];
-    $scope.chartdata1 = [[0,0,0,0,0,0,0,0,0,0]];
-    $scope.labels2 = ['0', '2:30', '5:00', '7:30', '10:00', '12:30', '15:00', '17:30', '20:00', '22:30'];
-    $scope.chartdata2 = [[0,0,0,0,0,0,0,0,0,0]];
+    $scope.labels1 = ['0', '3:00', '6:00', '9:00', '12:00', '15:00', '18:00', '21:00', '24:00'];
+    $scope.chartdata1 = [];
+    $http.get('/api/incidents')
+        .success(function(data){
+            let pattern = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+            for(let i = 0; i < data.length; i++){             
+                switch(data[i].startTime.substr(11).substr(0, 2)){
+                    case "00":
+                    case "01":
+                    case "02":
+                        pattern[0]++;
+                        break;
+                    case "03":
+                    case "04":
+                    case "05":
+                        pattern[1]++;
+                        break;
+                    case "06":
+                    case "07":
+                    case "08":
+                        pattern[2]++;
+                        break;
+                    case "09":
+                    case "10":
+                    case "11":
+                        pattern[3]++;
+                        break;
+                    case "12":
+                    case "13":
+                    case "14":
+                        pattern[4]++;
+                        break;
+                    case "15":
+                    case "16":
+                    case "17":
+                        pattern[5]++;
+                        break;
+                    case "18":
+                    case "19":
+                    case "20":
+                        pattern[6]++;
+                        break;
+                    case "21":
+                    case "22":
+                    case "23":
+                        pattern[7]++;
+                        break;   
+                }
+            pattern[8] = pattern[0];             
+            }
+            $scope.chartdata1.push(pattern);
+        })
+        .error(function(data){
+            console.log('Error' + data);
+        });
+    $scope.labels2 = ['0', '3:00', '6:00', '9:00', '12:00', '15:00', '18:00', '21:00', '24:00'];
+    $scope.chartdata2 = [[0,0,0,0,0,0,0,0,0]];
 /*-------------------------------------------------------------------------------------------------------*/
 /*                                          Draw map                                                     */
 /*-------------------------------------------------------------------------------------------------------*/
