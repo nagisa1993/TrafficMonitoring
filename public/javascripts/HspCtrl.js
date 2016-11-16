@@ -23,55 +23,87 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
 /*                                          Draw chart                                                   */
 /*-------------------------------------------------------------------------------------------------------*/
     // After obtaining traffic data from db, draw 2 line charts
-    $scope.labels1 = ['0', '3:00', '6:00', '9:00', '12:00', '15:00', '18:00', '21:00', '24:00'];
+    $scope.labels1 = ['0: 00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', 
+    '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
     $scope.chartdata1 = [];
     $http.get('/api/incidents')
         .success(function(data){
-            let pattern = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+            let pattern = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
             for(let i = 0; i < data.length; i++){             
                 switch(data[i].startTime.substr(11).substr(0, 2)){
                     case "00":
-                    case "01":
-                    case "02":
                         pattern[0]++;
                         break;
-                    case "03":
-                    case "04":
-                    case "05":
+                    case "01":
                         pattern[1]++;
                         break;
-                    case "06":
-                    case "07":
-                    case "08":
+                    case "02":
                         pattern[2]++;
                         break;
-                    case "09":
-                    case "10":
-                    case "11":
+                    case "03":
                         pattern[3]++;
                         break;
-                    case "12":
-                    case "13":
-                    case "14":
+                    case "04":
                         pattern[4]++;
                         break;
-                    case "15":
-                    case "16":
-                    case "17":
+                    case "05":
                         pattern[5]++;
                         break;
-                    case "18":
-                    case "19":
-                    case "20":
+                    case "06":
                         pattern[6]++;
                         break;
-                    case "21":
-                    case "22":
-                    case "23":
+                    case "07":
                         pattern[7]++;
+                        break;
+                    case "08":
+                        pattern[8]++;
+                        break;
+                    case "09":
+                        pattern[9]++;
+                        break;
+                    case "10":
+                        pattern[10]++;
+                        break;
+                    case "11":
+                        pattern[11]++;
+                        break;
+                    case "12":
+                        pattern[12]++;
+                        break;
+                    case "13":
+                        pattern[13]++;
+                        break;
+                    case "14":
+                        pattern[14]++;
+                        break;
+                    case "15":
+                        pattern[15]++;
+                        break;
+                    case "16":
+                        pattern[16]++;
+                        break;
+                    case "17":
+                        pattern[17]++;
+                        break;
+                    case "18":
+                        pattern[18]++;
+                        break;
+                    case "19":
+                        pattern[19]++;
+                        break;
+                    case "20":
+                        pattern[20]++;
+                        break;
+                    case "21":
+                        pattern[21]++;
+                        break;
+                    case "22":
+                        pattern[22]++;
+                        break;
+                    case "23":
+                        pattern[23]++;
                         break;   
-                }
-            pattern[8] = pattern[0];             
+                }             
             }
             $scope.chartdata1.push(pattern);
         })

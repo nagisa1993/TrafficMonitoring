@@ -109,4 +109,134 @@ module.exports = function(app) {
             res.json(req.body);
         });
     });
+
+    /**************************************************************************/
+    /**                               Hotspot                                **/
+    /**************************************************************************/
+    // get all locations according to weathers
+    app.post('/api/hotspots', function(req, res) {
+
+        // all weathers, so there's nothing to do with weather
+        if(req.body.weather == 'All'){
+            var results = [];
+            // weekend
+            if(req.body.day == "Weekend"){
+                Incidents.find({}, function(err, incidents){
+                    if(err)
+                        res.send(err);
+                    else{
+                        var temp = incidents.filter(function(obj){
+                            if(this == "Critical")
+                                return (obj.severity == 4 && (new Date(Date.parse(obj.created_at))).getUTCDay() == 0) || (obj.severity == 4 && (new Date(Date.parse(obj.created_at))).getUTCDay() == 6);
+                            else
+                                return (new Date(Date.parse(obj.created_at))).getUTCDay() == 0 || (new Date(Date.parse(obj.created_at))).getUTCDay() == 6;
+                        }, req.body.severity);
+                        for(var j = 0; j < temp.length; j++){
+                            results.push(temp[j]);
+                        }
+                    }
+                });
+            }
+
+            // weekday
+            else if(req.body.day == "Weekday"){
+                Incidents.find({}, function(err, incidents){
+                    if(err)
+                        res.send(err);
+                    else{
+                        var temp = incidents.filter(function(obj){
+                            if(this == "Critical")
+                                return (obj.severity == 4 && (new Date(Date.parse(obj.created_at))).getUTCDay() != 0) && (obj.severity == 4 && (new Date(Date.parse(obj.created_at))).getUTCDay() != 6);
+                            else
+                                return (new Date(Date.parse(obj.created_at))).getUTCDay() != 0 && (new Date(Date.parse(obj.created_at))).getUTCDay() != 6;
+                        }, req.body.severity);
+                        for(var j = 0; j < temp.length; j++){
+                            results.push(temp[j]);
+                        }
+                    }
+                });
+            }
+
+            // because HTTP is async, we should wait until results' finished
+            setTimeout(function(){
+                res.json(results);
+                results = [];
+            }, 100);
+        }
+
+        // specific weather
+        else{
+            Weathers.find({
+                weather: req.body.weather,
+                name: "New Brunswick"
+            }, function(err, weathers){
+                if(err)
+                    res.send(err);
+
+                // weathers are already JSON format[{},{}], so we should pull each weather object out
+                var results = [];
+                for(var i = 0; i < weathers.length; i++){
+                    var weatherday = (new Date(Date.parse(weathers[i].Date))).getUTCDay();
+
+                    // weekend and same date
+                    if((weatherday == 0 && req.body.day ==  "Weekend") || (weatherday == 6 && req.body.day ==  "Weekend")){
+                        Incidents.find({
+                            startTime: {$lte: weathers[i].Date},
+                            endTime: {$gte: weathers[i].Date}
+                        }, function(err, incidents){
+                            if(err)
+                                res.send(err);
+                            // return json format incidents with requested severity
+                            else{
+                                var temp = incidents.filter(function(obj){
+                                    if(this == 'Critical')
+                                        return obj.severity == 4;
+                                    else
+                                        return obj;
+                                }, req.body.severity);
+                                for(var j = 0; j < temp.length; j++){
+                                    results.push(temp[j]);
+                                }
+                            }
+                        });
+                    }
+
+                    // weekday and same date
+                    else if((weatherday != 0 && req.body.day ==  "Weekday") && (weatherday != 6 && req.body.day ==  "Weekday")){
+                        Incidents.find({
+                            startTime: {$lte: weathers[i].Date},
+                            endTime: {$gte: weathers[i].Date}
+                        }, function(err, incidents){
+                            if(err)
+                                res.send(err);
+                            // return json format incidents with requested severity
+                            else {
+                                var temp = incidents.filter(function(obj){
+                                    if(this == 'Critical')
+                                        return obj.severity == 4;
+                                    else
+                                        return obj;
+                                }, req.body.severity);
+                                for(var j = 0; j < temp.length; j++){
+                                    results.push(temp[j]);
+                                }
+                            }
+                        });
+                    }
+
+                    // no result matches
+                    else
+                        result = [];             
+                }
+
+                // because HTTP is async, we should wait until results' finished
+                setTimeout(function(){
+                    res.json(results);
+                    results = [];
+                }, 100);
+                
+            });
+        } 
+                              
+    });
 };
