@@ -15,87 +15,11 @@ mainCtrl.config(['ChartJsProvider', function (ChartJsProvider) {
     });
   }]);
 
-mainCtrl.controller('MainCtrl', function($scope, $http, $log, $timeout, uiGmapGoogleMapApi, uiGmapIsReady) {
+mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi, uiGmapIsReady) {
     // Do stuff with your $scope.
     // Note: Some of the directives require at least something to be defined originally!
     // e.g. $scope.markers = []
     $scope.formData = {};
-
-    // var geocodeRequest = "http://dev.virtualearth.net/REST/v1/Traffic/Incidents/37,-105,45,-94?key=Aski4bckJ0njTKhPccFX4APdYOe6AXI8_65EC2WrAWTT0ntUgIuQiRStrmkrwzQW&jsonp=JSON_CALLBACK";
-    // function CallRestService(request, callback) {
-    //     $http.jsonp(request)
-    //         .success(function (r) {
-    //             callback(r);
-    //         })
-    //         .error(function (data, status, error, thing) {
-    //             alert(error);
-    //         });
-    // };
-    //
-    // CallRestService(geocodeRequest, GeocodeCallback);
-    //
-    // function GeocodeCallback(result) {
-    //     // var rawdata = JSON.stringify(result);
-    //     // console.log(rawdata);
-    //     var rawincidents = result;
-    //     // console.log(rawincidents);
-    //     $scope.incidents = [];
-    //     angular.forEach(result.resourceSets[0].resources, function (item) {
-    //         var newincident = {
-    //             "location": {
-    //                 "Lat": item.point.coordinates[0],
-    //                 "Lng": item.point.coordinates[1]
-    //             },
-    //             // do slicing and get millisecond integer
-    //             "start": millToUTC(parseInt(item.start.substring(6,item.start.length-2))),
-    //             "end": millToUTC(parseInt(item.end.substring(6,item.end.length-2))),
-    //             "severity": item.severity
-    //         }
-    //         console.log(newincident);
-    //         $scope.incidents.push(newincident);
-            // $http.post('/api/incidents', newincident)
-            //     .success(function (data) {
-            //         // Once complete, clear the form (except location)
-            //     })
-            //     .error(function (data) {
-            //         console.log('Error: ' + data);
-            //     });
-        // });
-        // console.log(JSON.stringify($scope.incidents));
-    // };
-
-
-
-    // function millToUTC(millseconds) {
-    //     var oneSecond = 1000;
-    //     var oneMinute = oneSecond * 60;
-    //     var oneHour = oneMinute * 60;
-    //     var oneDay = oneHour * 24;
-    //
-    //     var seconds = Math.floor((millseconds % oneMinute) / oneSecond);
-    //     var minutes = Math.floor((millseconds % oneHour) / oneMinute);
-    //     var hours = Math.floor((millseconds % oneDay) / oneHour);
-    //     var days = Math.floor(millseconds / oneDay);
-    //
-    //     var timeString = '';
-    //     if (days !== 0) {
-    //         timeString += (days !== 1) ? (days + ' days ') : (days + ' day ');
-    //     }
-    //     if (hours !== 0) {
-    //         timeString += (hours !== 1) ? (hours + ' hours ') : (hours + ' hour ');
-    //     }
-    //     if (minutes !== 0) {
-    //         timeString += (minutes !== 1) ? (minutes + ' minutes ') : (minutes + ' minute ');
-    //     }
-    //     if (seconds !== 0 || millseconds < 1000) {
-    //         timeString += (seconds !== 1) ? (seconds + ' seconds ') : (seconds + ' second ');
-    //     }
-    //
-    //     return timeString;
-    // };
-
-
-
 /*-------------------------------------------------------------------------------------------------------*/
 /*                                          Draw chart                                                   */
 /*-------------------------------------------------------------------------------------------------------*/
@@ -104,91 +28,15 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, $timeout, uiGmapGo
     '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
     $scope.chartdata1 = [];
     $http.get('/api/incidents')
-        .success(function(data){
-            let pattern = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-            for(let i = 0; i < data.length; i++){             
-                switch(data[i].startTime.substr(11).substr(0, 2)){
-                    case "00":
-                        pattern[0]++;
-                        break;
-                    case "01":
-                        pattern[1]++;
-                        break;
-                    case "02":
-                        pattern[2]++;
-                        break;
-                    case "03":
-                        pattern[3]++;
-                        break;
-                    case "04":
-                        pattern[4]++;
-                        break;
-                    case "05":
-                        pattern[5]++;
-                        break;
-                    case "06":
-                        pattern[6]++;
-                        break;
-                    case "07":
-                        pattern[7]++;
-                        break;
-                    case "08":
-                        pattern[8]++;
-                        break;
-                    case "09":
-                        pattern[9]++;
-                        break;
-                    case "10":
-                        pattern[10]++;
-                        break;
-                    case "11":
-                        pattern[11]++;
-                        break;
-                    case "12":
-                        pattern[12]++;
-                        break;
-                    case "13":
-                        pattern[13]++;
-                        break;
-                    case "14":
-                        pattern[14]++;
-                        break;
-                    case "15":
-                        pattern[15]++;
-                        break;
-                    case "16":
-                        pattern[16]++;
-                        break;
-                    case "17":
-                        pattern[17]++;
-                        break;
-                    case "18":
-                        pattern[18]++;
-                        break;
-                    case "19":
-                        pattern[19]++;
-                        break;
-                    case "20":
-                        pattern[20]++;
-                        break;
-                    case "21":
-                        pattern[21]++;
-                        break;
-                    case "22":
-                        pattern[22]++;
-                        break;
-                    case "23":
-                        pattern[23]++;
-                        break;   
-                }             
-            }
-            $scope.chartdata1.push(pattern);
+        .success(function(data){  
+            $scope.chartdata1.push(data);
         })
         .error(function(data){
             console.log('Error' + data);
         });
-    $scope.labels2 = ['0', '3:00', '6:00', '9:00', '12:00', '15:00', '18:00', '21:00', '24:00'];
-    $scope.chartdata2 = [[0,0,0,0,0,0,0,0,0]];
+    $scope.labels2 = ['0: 00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', 
+    '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
+    $scope.chartdata2 = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 /*-------------------------------------------------------------------------------------------------------*/
 /*                                          Draw map                                                     */
 /*-------------------------------------------------------------------------------------------------------*/

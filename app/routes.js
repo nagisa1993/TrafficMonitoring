@@ -68,18 +68,56 @@ module.exports = function(app) {
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err)
                 res.send(err);
-            res.json(incidents); // return all incidents in JSON format
+            var results = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+            var incidentobj = function(){
+              this.getobjhour = function(){
+                return this.getHours();
+              };
+              return this;
+            };
+
+            for(var i = 0; i < incidents.length; i++){
+              // to calculate all incidents according to hours, we take created_at param
+              var obj = incidentobj.apply(incidents[i].created_at);
+              var num = parseInt(obj.getobjhour());
+              results[num]++;
+            }
+
+            res.send(results);
+            res.end();
         });
     });
 
     // create a incident and send back all incidents after creation
     app.post('/api/incidents', function(req, res) {
         // create a incident
-        var newincidents = new Incidents(req.body);
-        newincidents.save(function(err){
-            if(err)
+        Incidents.find({
+            $or: [ 
+                { fromLocation: req.body}, 
+                { toLocation: req.body} 
+            ]
+        },function(err, incidents) {
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err)
                 res.send(err);
-            res.json(req.body);
+            var results = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+            var incidentobj = function(){
+              this.getobjhour = function(){
+                return this.getHours();
+              };
+              return this;
+            };
+
+            for(var i = 0; i < incidents.length; i++){
+              var obj = incidentobj.apply(incidents[i].created_at);
+              var num = parseInt(obj.getobjhour());
+              results[num]++;
+            }
+
+            res.send(results);
+            res.end();
         });
     });
 
@@ -89,12 +127,11 @@ module.exports = function(app) {
     // get all weathers
     app.get('/api/weathers', function(req, res) {
         // use mongoose to get all weathers in the database
-        Weathers.find(function(err, incidents) {
+        Weathers.find(function(err, weathers) {
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err)
                 res.send(err);
-
-            res.json(incidents); // return all incidents in JSON format
+            res.json(weathers); // return all incidents in JSON format
         });
     });
 
@@ -226,7 +263,7 @@ module.exports = function(app) {
 
                     // no result matches
                     else
-                        result = [];             
+                        results = [];             
                 }
 
                 // because HTTP is async, we should wait until results' finished
