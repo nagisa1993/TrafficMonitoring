@@ -89,12 +89,12 @@ module.exports = function(app) {
     // get all weathers
     app.get('/api/weathers', function(req, res) {
         // use mongoose to get all weathers in the database
-        Weathers.find(function(err, incidents) {
+        Weathers.find(function(err, weather) {
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err)
                 res.send(err);
 
-            res.json(incidents); // return all incidents in JSON format
+            res.json(weather); // return all incidents in JSON format
         });
     });
 
