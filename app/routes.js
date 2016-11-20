@@ -194,6 +194,25 @@ module.exports = function(app) {
                 });
             }
 
+            // all
+            else{
+                Incidents.find({}, function(err, incidents){
+                    if(err)
+                        res.send(err);
+                    else{
+                        var temp = incidents.filter(function(obj){
+                            if(this == "Critical")
+                                return obj.severity == 4;
+                            else
+                                return obj;
+                        }, req.body.severity);
+                        for(var j = 0; j < temp.length; j++){
+                            results.push(temp[j]);
+                        }
+                    }
+                });
+            }
+
             // because HTTP is async, we should wait until results' finished
             setTimeout(function(){
                 res.json(results);
@@ -240,6 +259,29 @@ module.exports = function(app) {
 
                     // weekday and same date
                     else if((weatherday != 0 && req.body.day ==  "Weekday") && (weatherday != 6 && req.body.day ==  "Weekday")){
+                        Incidents.find({
+                            startTime: {$lte: weathers[i].Date},
+                            endTime: {$gte: weathers[i].Date}
+                        }, function(err, incidents){
+                            if(err)
+                                res.send(err);
+                            // return json format incidents with requested severity
+                            else {
+                                var temp = incidents.filter(function(obj){
+                                    if(this == 'Critical')
+                                        return obj.severity == 4;
+                                    else
+                                        return obj;
+                                }, req.body.severity);
+                                for(var j = 0; j < temp.length; j++){
+                                    results.push(temp[j]);
+                                }
+                            }
+                        });
+                    }
+
+                    // all
+                    else if(req.body.day == "All"){
                         Incidents.find({
                             startTime: {$lte: weathers[i].Date},
                             endTime: {$gte: weathers[i].Date}
