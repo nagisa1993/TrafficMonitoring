@@ -17,42 +17,43 @@
 					<div class="form-group">
                         <label>Day:</label><br>
                         <label class="radio-inline">
-                            <input type="radio" name="day" ng-model="formData.day">Weekday
+                            <input type="radio" name="day" ng-model="formData.day" value="Weekday">Weekday
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="day" ng-model="formData.day">Weekend
+                            <input type="radio" name="day" ng-model="formData.day" value="Weekend">Weekend
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="day" ng-model="formData.day">All
+                            <input type="radio" name="day" ng-model="formData.day" value="All">All
                         </label>
 					</div>
 					<div class="form-group">
 						<label>Weather:</label><br>
                         <label class="radio-inline">
-                            <input type="radio" name="weather" ng-model="formData.weather">Clear
+                            <input type="radio" name="weather" ng-model="formData.weather" value="Clear">Clear
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="weather" ng-model="formData.weather">Rain
+                            <input type="radio" name="weather" ng-model="formData.weather" value="Rain">Rain
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="weather" ng-model="formData.weather">Clouds
+                            <input type="radio" name="weather" ng-model="formData.weather" value="Clouds">Clouds
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="weather" ng-model="formData.weather">Haze
+                            <input type="radio" name="weather" ng-model="formData.weather" value="Haze">Haze
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="weather" ng-model="formData.weather">All
+                            <input type="radio" name="weather" ng-model="formData.weather" value="All">All
                         </label>
 					</div>
 					<div class="form-group">
 						<label>Severity:</label><br>
                         <label class="radio-inline">
-                            <input type="radio" name="severity" ng-model="formData.severity">Critical
+                            <input type="radio" name="severity" ng-model="formData.severity" value="Critical">Critical
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="severity" ng-model="formData.severity">All
+                            <input type="radio" name="severity" ng-model="formData.severity" value="All">All
                         </label>
 					</div>
+                    <p>{{formData|json}}</p>
 					<br>
 					<div class="form-group pull-right">
 						<button class="btn btn-default" ng-click="reset()">Reset</button>
