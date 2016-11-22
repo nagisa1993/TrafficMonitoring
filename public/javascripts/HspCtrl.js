@@ -124,25 +124,14 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
                     .error(function(err){
                         console.log('Error: ' + err);
                     });
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
 
-            // change traffic pattern for all area
-            $http.get('/api/results')
+                // update traffic pattern chart for all locations
+                $http.get('/api/results')
                 .success(function(data){
+                    //console.log("i'm changing traffic pattern for all area");
                     var a = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-
-                    var incidentobj = function(){
-                        this.getobjhour = function(){
-                            return this.getHours();
-                        };
-                        return this;
-                    };
                     for(var i = 0; i < data.length; i++){
-                        console.log(typeof data[i].created_at);
-                        var num = new Date(Date.parse(data[i].created_at)).getUTCHours();
+                        var num = new Date(Date.parse(data[i].created_at)).getHours();
                         a[num]++;
                     }
                     $scope.chartdata1 = [];
@@ -151,6 +140,10 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
                 .error(function(err){
                     console.log('Error: ' + err);
                 })
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
 
             $scope.events = {
                     click: function(marker, eventName, model){
