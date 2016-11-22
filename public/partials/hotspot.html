@@ -6,7 +6,12 @@
             <div class="col-md-8 col-sm-12 col-xs-12">
 				<div id="map">
 					<ui-gmap-google-map center='map.center' zoom='map.zoom' id='maps'>
-						<ui-gmap-markers models="Markers" coords="'self'" icon="'icon'">
+						<ui-gmap-markers models="Markers" coords="'self'" icon="'icon'" events="events">
+                        <!-- <ui-gmap-windows show="window.show" closeClick="window.closeClick()" coords="window.model" options="window.options">
+                            <div style="color: black">
+                            {{map.window.title}}
+                            </div>
+                        </ui-gmap-windows> -->
                         </ui-gmap-markers>
 					</ui-gmap-google-map>
 				</div>
@@ -53,7 +58,6 @@
                             <input type="radio" name="severity" ng-model="formData.severity" value="All">All
                         </label>
 					</div>
-                    <p>{{formData|json}}</p>
 					<br>
 					<div class="form-group pull-right">
 						<button class="btn btn-default" ng-click="reset()">Reset</button>
@@ -68,7 +72,7 @@
 			<canvas class="chart chart-line" chart-data="chartdata1" chart-labels="labels1"></canvas> 
 		</div>
 		<div class="col-md-6 col-sm-12 col-xs-12">
-			<label style="padding-bottom:5px">Traffic pattern for selected location: {{pin.location}}</label>
+			<label style="padding-bottom:5px">Traffic pattern for selected location: {{place}}</label>
 			<canvas class="chart chart-line" chart-data="chartdata2" chart-labels="labels2"></canvas>
 		</div>
 	</div>
