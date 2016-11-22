@@ -55,24 +55,46 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
     };
 
     //$scope.Markers = [];
-    let markers = [];
-    $http.post('/api/hotspots', $scope.formData)
-            .success(function (data) {
-                // Once complete, clear the form (except location)
-                console.log("ok" + $scope.formData);
-                let markers = [];
-                for(let i = 0; i < data.length; i++){
-                    let newmarker = {};
-                    newmarker.latitude = data[i].location.lat;
-                    newmarker.longitude = data[i].location.lng;
-                    newmarker.id = i;
-                    markers.push(newmarker);
-                }      
-                $scope.Markers = markers;
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-    });
+    $scope.Markers = [];
+    // $http.post('/api/hotspots', $scope.formData)
+    //         .success(function (data) {
+    //             // Once complete, clear the form (except location)
+    //             console.log("ok" + $scope.formData);
+    //             let markers = [];
+    //             for(let i = 0; i < data.length; i++){
+    //                 let newmarker = {};
+    //                 newmarker.latitude = data[i].location.lat;
+    //                 newmarker.longitude = data[i].location.lng;
+    //                 newmarker.id = i;
+    //                 newmarker.title = data[i].description;
+    //                 markers.push(newmarker);
+    //             }      
+    //             $scope.Markers = markers;
+    //             $scope.events = {
+    //                 click: function(marker, eventName, model){
+    //                     console.log(marker + " " + eventName + " " + model);
+    //                     $scope.window.model = model;
+    //                     $scope.window.title = model.title;
+    //                     $scope.InfoShow = true;
+
+    //                 }
+    //             };
+    //             $scope.window = {
+    //                 marker: {},
+    //                 show: false,
+    //                 closeClick: function() {
+    //                     this.show = false;
+    //                 },
+    //                 options: {}, // define when map is ready
+    //                 title: ''
+    //             };
+    //         })
+    //         .error(function (data) {
+    //             console.log('Error: ' + data);
+    // });
+    // $scope.closeClick = function () {
+    //     this.window = false;
+    // };
 
     
 /*-------------------------------------------------------------------------------------------------------*/
@@ -82,20 +104,73 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
         // get all incidents according to form data
         $http.post('/api/hotspots', $scope.formData)
             .success(function (data) {
-                // Once complete, clear the form (except location)
                 let markers = [];
                 for(let i = 0; i < data.length; i++){
                     let newmarker = {};
                     newmarker.latitude = data[i].location.lat;
                     newmarker.longitude = data[i].location.lng;
+                    newmarker.place = data[i].toLocation;
                     newmarker.id = i;
                     markers.push(newmarker);
                 }      
                 $scope.Markers = markers;
+
+                // after we obtain the incidents according to Weather, Day and Severity,
+                // send back the results to Results database
+                $http.post('/api/results', data)
+                    .success(function(dt){
+                        console.log("Send incidents data back to Results database");
+                    })
+                    .error(function(err){
+                        console.log('Error: ' + err);
+                    });
             })
             .error(function (data) {
                 console.log('Error: ' + data);
             });
+
+            // change traffic pattern for all area
+            $http.get('/api/results')
+                .success(function(data){
+                    var a = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+                    var incidentobj = function(){
+                        this.getobjhour = function(){
+                            return this.getHours();
+                        };
+                        return this;
+                    };
+                    for(var i = 0; i < data.length; i++){
+                        console.log(typeof data[i].created_at);
+                        var num = new Date(Date.parse(data[i].created_at)).getUTCHours();
+                        a[num]++;
+                    }
+                    $scope.chartdata1 = [];
+                    $scope.chartdata1.push(a);
+                })
+                .error(function(err){
+                    console.log('Error: ' + err);
+                })
+
+            $scope.events = {
+                    click: function(marker, eventName, model){
+                        // eventName is the name of event, e.g.: "click"
+                        // model is the marker that we click, it contain the key we save before
+                        // marker is google map marker object, we can define the attr, like "marker.showWindow=true"
+                        console.log(model.place);
+                        $scope.place = model.place;
+                        var clickedmark = {};
+                        clickedmark.place = model.place;
+                        $http.post('/api/incidents', clickedmark)
+                            .success(function(data){
+                                $scope.chartdata2 = [];
+                                $scope.chartdata2.push(data);
+                            })
+                            .error(function(data){
+                                console.log('Error: ' + data);
+                            });
+                    }
+            };
     };
 
     $scope.reset = function() {
