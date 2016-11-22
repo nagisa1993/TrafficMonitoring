@@ -5,6 +5,7 @@
 var History = require('./models/model');
 var Incidents = require('./models/incidents');
 var Weathers = require('./models/weather');
+var Results = require('./models/result');
 
 // Opens App routes RESTful design
 module.exports = function(app) {
@@ -59,6 +60,41 @@ module.exports = function(app) {
     });
 
     /**************************************************************************/
+    /**                              Results                                 **/
+    /**************************************************************************/
+    app.get('/api/results', function(req, res) {
+        Results.find(function(err, results) {
+            if (err)
+                res.send(err);
+
+            res.json(results);
+        });
+    });
+
+    app.post('/api/results', function(req, res) {
+
+        // remove all results first, cuz results are just cache
+        Results.remove({}, function(err){
+            if(err)
+                console.log(err);
+            else
+                console.log("clean!");
+        });
+
+        for(var k = 0; k < req.body.length; k++){
+            var newresult = new Results(req.body[k]);
+            newresult.save(function(err){
+                if(err){return err;}
+                else console.log("Save");
+            });
+        }
+
+        // tell server it is done with saving
+        res.send("done");
+        res.end();
+    });
+
+    /**************************************************************************/
     /**                              Incident                                **/
     /**************************************************************************/
     // get all incidents
@@ -92,10 +128,10 @@ module.exports = function(app) {
     // create a incident and send back all incidents after creation
     app.post('/api/incidents', function(req, res) {
         // create a incident
-        Incidents.find({
+        Results.find({
             $or: [ 
-                { fromLocation: req.body}, 
-                { toLocation: req.body} 
+                { fromLocation: req.body.place}, 
+                { toLocation: req.body.place} 
             ]
         },function(err, incidents) {
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
@@ -319,3 +355,4 @@ module.exports = function(app) {
                               
     });
 };
+

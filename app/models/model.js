@@ -1,3 +1,6 @@
+/**
+** Created by mahaiyue on 10/16/16
+**/
 // Create MongoDB collections model
 
 // Pulls Mongoose dependency for creating schemas
