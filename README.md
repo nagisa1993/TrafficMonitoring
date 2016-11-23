@@ -66,7 +66,7 @@ This project follows a typical structure for Angular Application ([Example](http
 ```
 - app               // holds all our files for node components (routes, models)
     -- models       // all mongodb schema
-    -- route.js     // router for REST services   
+    -- route.js     // router for REST services   [
 - server.js         // node configuration & main entry for this application
 - public            // holds all our files for frontend angular applications
     -- images
@@ -98,5 +98,5 @@ A full list of history object will be returned after POST finished.
 
 To do integration testing, please go to homepage and just browse as other website!
 
-To check the correctness of database objects, please use visualization tools like (robomongo)[https://robomongo.org/]
+To check the correctness of database objects, please use visualization tools like [robomongo](https://robomongo.org/)
 
