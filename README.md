@@ -57,6 +57,15 @@ This project follows a typical structure for Angular Application ([Example](http
 ````
 
 ## Sample testing
-For testing on REST API: we recommend a chrome plug-in - [POSTMAN](https://www.getpostman.com/) 
+For testing REST API, [POSTMAN](https://www.getpostman.com/) is recommended
+choose http get
+```
 
-## Contributions 
+````
+## Contributors 
+Yichen Zhou:
+Haiyue Ma:
+Sirun Xu:
+Shi Wang:
+Qi Li:
+Yao Lu:
