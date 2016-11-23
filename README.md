@@ -24,6 +24,15 @@ brew install mongodb
 ```
 npm install
 ````
+* Start mongodb by typing in shell:
+```
+mongod
+````
+* Start Server
+```
+npm start
+````
+Then open the browser, type url: "localhost:3000" and the application will show up.
 
 ## Dependencies
 Please check Package.json. It list all node package dependencies and usually more up to date than this readme file!
@@ -57,11 +66,20 @@ This project follows a typical structure for Angular Application ([Example](http
 ````
 
 ## Sample testing
-For testing REST API, [POSTMAN](https://www.getpostman.com/) is recommended
-choose http get
+To test REST API, [POSTMAN](https://www.getpostman.com/) is recommended
+* To execute a HTTP get request, simply choose a get method on left of url blank and click "send" button.
+* For HTTP POST, type the exact json object in body, like: 
 ```
-
+{
+    "ori": "New Brunswick",
+    "des": "Edison",
+    "Time": 1
+}
 ````
+A full list of history object will be returned after POST finished.
+
+To do integration testing, please go to homepage and just browse as other website!
+
 ## Contributors 
 Yichen Zhou:
 Haiyue Ma:
