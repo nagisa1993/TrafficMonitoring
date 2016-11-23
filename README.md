@@ -80,15 +80,3 @@ A full list of history object will be returned after POST finished.
 
 To do integration testing, please go to homepage and just browse as other website!
 
-## Contributors 
-Yichen Zhou:
-
-Haiyue Ma:
-
-Sirun Xu:
-
-Shi Wang:
-
-Qi Li:
-
-Yao Lu:
