@@ -6,7 +6,7 @@ A website to retrieve historic traffic pattern over certain areas, provide stati
 This application is implemented in MongoDB, Node.js, Express and AngularJS. For running this project, we recommend using macOS or Linux which can take advantage of powerful tools like: homebrew.
 
 ## Installation
-To keep the project organized well, there's a list of tools to pick up:
+To keep the project organized well, there's some suggestion for tools to pick up:
 - [brew](http://brew.sh): package manager application for maxOS.
 - [npm](https://www.npmjs.com/): node package manager.
 - [mongodb](https://docs.mongodb.com/v3.2/tutorial/install-mongodb-on-os-x/): MongoDB database.
