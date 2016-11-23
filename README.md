@@ -11,7 +11,7 @@ To keep the project organized well, there's a list of tools to pick up:
 - [npm](https://www.npmjs.com/): node package manager.
 - [mongodb](https://docs.mongodb.com/v3.2/tutorial/install-mongodb-on-os-x/): MongoDB database.
 
-## Quick Start
+## Quick Setup
 * Use brew to install [npm](https://docs.npmjs.com/getting-started/installing-node):
 ``` 
 brew install npm
@@ -24,7 +24,21 @@ brew install mongodb
 ```
 npm install
 ````
-* Start mongodb by typing in shell:
+
+## Begin Traffic Monitoring 
+Please make sure to type commands at root directory of project files.
+* Clone project file
+```
+mkdir demo
+cd demo
+git init
+git clone https://github.com/ShizuoZ/TrafficMonitoring.git
+````
+* Import example data, make sure go to parent folder of dump folder before typing commends
+```
+mongorestore
+````
+* Start mongodb
 ```
 mongod
 ````
@@ -32,7 +46,11 @@ mongod
 ```
 npm start
 ````
+
 Then open the browser, type url: "localhost:3000" and the application will show up.
+
+## Data Collection
+
 
 ## Dependencies
 Please check Package.json. It list all node package dependencies and usually more up to date than this readme file!
@@ -79,4 +97,6 @@ To test REST API, [POSTMAN](https://www.getpostman.com/) is recommended
 A full list of history object will be returned after POST finished.
 
 To do integration testing, please go to homepage and just browse as other website!
+
+To check the correctness of database objects, please use visualization tools like (robomongo)[https://robomongo.org/]
 
