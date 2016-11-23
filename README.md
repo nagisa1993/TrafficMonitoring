@@ -82,8 +82,13 @@ To do integration testing, please go to homepage and just browse as other websit
 
 ## Contributors 
 Yichen Zhou:
+
 Haiyue Ma:
+
 Sirun Xu:
+
 Shi Wang:
+
 Qi Li:
+
 Yao Lu:
