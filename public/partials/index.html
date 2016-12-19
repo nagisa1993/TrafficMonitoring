@@ -4,6 +4,10 @@
 	<div class="row">
             <!-- map -->
             <div class="col-md-8 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-title">
+                    <label style="padding-bottom:5px">Map</label>
+                </div>
 				<div id="map">
 					<ui-gmap-google-map center='map.center' zoom='map.zoom' id='maps'>
 						<ui-gmap-marker
@@ -13,10 +17,15 @@
 								idkey="marker.id">
 						</ui-gmap-marker>
 					</ui-gmap-google-map>
+					</div>
 				</div>
             </div>
             <!-- form -->
             <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-title">
+                    <label style="padding-bottom:5px">Please fill in the form</label>
+                </div>
             	<form class="form-horizontal" style="padding: 40px">
 					<div class="form-group">
 						<label for="origin">Origin:</label>
@@ -61,16 +70,25 @@
 					    <button class="btn btn-info" ng-click="update()">Submit</button>
 					</div>	
       			</form>
+      			</div>
             </div>
 	</div>
 	<div class="row">
 		<div class="col-md-6 col-xs-12">
-			<label style="padding-bottom:5px">Traffic pattern along the specific route:</label>
+			<div class="card">
+                <div class="card-title">
+                    <label style="padding-bottom:5px">Traffic pattern along the specific route:</label>
+                </div>			
 			<canvas class="chart chart-line" chart-data="chartdata1" chart-labels="labels1"></canvas> 
+			</div>
 		</div>
 		<div class="col-md-6 col-xs-12">
-			<label style="padding-bottom:5px">Traffic pattern for selected location: {{pin.location}}</label>
+			<div class="card">
+                <div class="card-title">
+                    <label style="padding-bottom:5px">Traffic pattern for selected location: {{pin.location}}</label>
+                </div>	
 			<canvas class="chart chart-line" chart-data="chartdata2" chart-labels="labels2"></canvas>
+			</div>
 		</div>
 	</div>
 </div>

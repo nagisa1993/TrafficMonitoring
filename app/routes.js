@@ -81,17 +81,19 @@ module.exports = function(app) {
                 console.log("clean!");
         });
 
-        for(var k = 0; k < req.body.length; k++){
-            var newresult = new Results(req.body[k]);
-            newresult.save(function(err){
-                if(err){return err;}
-                else console.log("Save");
-            });
-        }
-
-        // tell server it is done with saving
-        res.send("done");
-        res.end();
+        //wait until cleanup and then save
+        setTimeout(function(){
+            for(var k = 0; k < req.body.length; k++){
+                var newresult = new Results(req.body[k]);
+                newresult.save(function(err){
+                    if(err){return err;}
+                    else console.log("Save");
+                });
+            }
+            // tell server it is done with saving
+            res.send("done");
+            res.end();
+        }, 100);  
     });
 
     /**************************************************************************/

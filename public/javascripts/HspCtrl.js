@@ -23,6 +23,10 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
         "weather": "All",
         "severity": "All"
     };
+
+    $scope.checkbox = [true, true, true, true, true];
+    $scope.tmp = [];
+    $scope.querydata = [];
 /*-------------------------------------------------------------------------------------------------------*/
 /*                                          Draw chart                                                   */
 /*-------------------------------------------------------------------------------------------------------*/
@@ -104,6 +108,7 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
         // get all incidents according to form data
         $http.post('/api/hotspots', $scope.formData)
             .success(function (data) {
+                $scope.querydata = data;
                 let markers = [];
                 for(let i = 0; i < data.length; i++){
                     let newmarker = {};
@@ -111,57 +116,92 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
                     newmarker.longitude = data[i].location.lng;
                     newmarker.place = data[i].toLocation;
                     newmarker.id = i;
+                    newmarker.severity = data[i].severity;
+                    switch (data[i].severity){
+                        case 0:
+                            newmarker.icon = "../images/bluemarker.png";
+                            break;
+                        case 1:
+                            newmarker.icon = "../images/greenmarker.png";
+                            break;
+                        case 2:
+                            newmarker.icon = "../images/yellowmarker.png";
+                            break;
+                        case 3:
+                            newmarker.icon = "../images/orangemarker.png";
+                            break;
+                        case 4:
+                            newmarker.icon = "../images/redmarker.png";
+                            break;
+                    }
                     markers.push(newmarker);
-                }      
+                }  
+                // save all markers to tmp for checkbox  
+                $scope.tmp = markers;  
                 $scope.Markers = markers;
+                console.log($scope.Markers);
 
                 // after we obtain the incidents according to Weather, Day and Severity,
                 // send back the results to Results database
-                $http.post('/api/results', data)
-                    .success(function(dt){
-                        console.log("Send incidents data back to Results database");
+                // $http.post('/api/results', data)
+                //     .success(function(dt){
+                //         console.log("Send incidents data back to Results database");
+
+                //             // update traffic pattern chart for all locations
+                //             $http.get('/api/results')
+                //             .success(function(data){
+                //                 //console.log("i'm changing traffic pattern for all area");
+                //                 var a = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+                //                 for(var i = 0; i < data.length; i++){
+                //                     var num = new Date(Date.parse(data[i].created_at)).getHours();
+                //                     a[num]++;
+                //                 }
+                //                 $scope.chartdata1 = [];
+                //                 $scope.chartdata1.push(a);
+                //             })
+                //             .error(function(err){
+                //                 console.log('Error: ' + err);
+                //             });
+                //             ////////////////////
+
+                //         })
+                //         .error(function (data) {
+                //             console.log('Error: ' + data);
+                //         });
+                    var a = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+                    for(var i = 0; i < data.length; i++){
+                            var num = new Date(Date.parse(data[i].created_at)).getHours();
+                            a[num]++;
+                        }
+                        $scope.chartdata1 = [];
+                        $scope.chartdata1.push(a);
                     })
                     .error(function(err){
                         console.log('Error: ' + err);
                     });
 
-                // update traffic pattern chart for all locations
-                $http.get('/api/results')
-                .success(function(data){
-                    //console.log("i'm changing traffic pattern for all area");
-                    var a = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-                    for(var i = 0; i < data.length; i++){
-                        var num = new Date(Date.parse(data[i].created_at)).getHours();
-                        a[num]++;
-                    }
-                    $scope.chartdata1 = [];
-                    $scope.chartdata1.push(a);
-                })
-                .error(function(err){
-                    console.log('Error: ' + err);
-                })
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
+
+                
 
             $scope.events = {
                     click: function(marker, eventName, model){
                         // eventName is the name of event, e.g.: "click"
                         // model is the marker that we click, it contain the key we save before
                         // marker is google map marker object, we can define the attr, like "marker.showWindow=true"
-                        console.log(model.place);
                         $scope.place = model.place;
-                        var clickedmark = {};
-                        clickedmark.place = model.place;
-                        $http.post('/api/incidents', clickedmark)
-                            .success(function(data){
-                                $scope.chartdata2 = [];
-                                $scope.chartdata2.push(data);
-                            })
-                            .error(function(data){
-                                console.log('Error: ' + data);
-                            });
+                        var results = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+                        // filter all incidents containing clicked place
+                        var containplace = $scope.querydata.filter(function(obj){
+                            return obj.fromLocation == model.place || obj.toLocation == model.place;
+                        });
+
+                        for(let i = 0; i < containplace.length; i++){
+                            var num = new Date(Date.parse(containplace[i].created_at)).getHours();
+                            results[num]++;
+                        }
+                        $scope.chartdata2 = [];
+                        $scope.chartdata2.push(results);
                     }
             };
     };
@@ -169,4 +209,29 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
     $scope.reset = function() {
         $scope.formData = {};
     }
+
+/*-------------------------------------------------------------------------------------------------------*/
+/*                                              Checkbox                                                 */
+/*-------------------------------------------------------------------------------------------------------*/  
+    $scope.$watch('checkbox', function(newvar, oldvar) {
+        let check = [];
+        newvar.forEach(function(e, index){
+            if(e == true)
+                check.push(index);
+        });
+        console.log(check);
+        if(check.length == 0)
+            $scope.Markers = [];
+        else{
+            $scope.Markers = [];
+            check.forEach(function(e){
+                $scope.Markers = $scope.Markers.concat($scope.tmp.filter(function(obj){
+                    return obj.severity == e;
+                }));
+            });
+        }
+        
+        console.log($scope.Markers);
+        //console.log(check);
+    }, true); 
 });
