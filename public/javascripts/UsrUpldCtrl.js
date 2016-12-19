@@ -17,6 +17,14 @@ usrUpldCtrl.controller('UsrUpldCtrl', function($scope, $http, $log, uiGmapGoogle
         "report": "All",
       };
 
+    $http.get('/api/reports')
+        .success(function(data){
+            $scope.reports = data;
+        })
+        .error(function(e){
+            console.log(e);
+        });
+
 /*-------------------------------------------------------------------------------------------------------*/
 /*                                          Form Controller                                              */
 /*-------------------------------------------------------------------------------------------------------*/
@@ -33,21 +41,37 @@ usrUpldCtrl.controller('UsrUpldCtrl', function($scope, $http, $log, uiGmapGoogle
         $scope.marker = {};
 
         // Saves the user data to the db
-        $http.post('/api/historys', $scope.formData)
-            .success(function (data) {
+        $http.post('/api/reports', $scope.formData)
+            .then(function (data) {
                 // Once complete, clear the form (except location)
                 $scope.formData = {};
 
+                return $http.get('/api/reports');
+                    
+                // Because in this case the returned response contains: config, data, headers,
+                // status, statusText, __proto__
+                // We need to choose data in response                        
             })
-            .error(function (data) {
-                console.log('Error: ' + data);
+            .then(function(res){
+                $scope.reports = res.data;
             });
-
+            
     };
 
     $scope.reset = function() {
         $scope.formData = {};
     }
+
+    $scope.deleteReport = function(id) {
+        $http.delete('/api/reports/' + id)
+            .success(function(data) {
+                $scope.reports = data;
+                //console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    };
 });
 /*-------------------------------------------------------------------------------------------------------*/
 /*                                          Address Autocomplete                                         */

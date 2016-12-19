@@ -1,15 +1,33 @@
 <!--Created by sirunxu on 12/15/16.-->
 
-<div class="content">
-	<div class="row">
-           
-   
+<div class="content">         
+   			<div>
+   				<table class="table table-striped">
+				  <thead>
+				  	<th>Location</th>
+				  	<th style="text-align: center">Time</th>
+				  	<th>Category</th>
+					<th style="text-align: center">Delete</th>
+				  </thead>
+				  <tbody>
+				  	<tr ng-repeat="x in reports">
+				  		<td>{{x.location}}</td>
+				  		<td style="text-align: center">{{x.time}}</td>
+				  		<td>{{x.category}}</td>
+						<td style="text-align: center"><span class="glyphicon glyphicon-remove" ng-click="deleteReport(x._id)"></span></td>
+				  	</tr>
+				  </tbody>
+				</table>
+   			</div>
              <!-- form -->
-            <div class="col-md-4 col-sm-12">
+            <div class="card">
+	            <div class="card-title">
+	            	<label>Please input the report form</label>
+	            </div>
             	<form class="form-horizontal" style="padding: 40px">
 					<div class="form-group">
 						<label for="location">Location:</label>
-					    <input class="form-control" id="location" name="location" placeholder="Location" required="" type="text" ng-model="formData.ori" googleplace/>
+					    <input class="form-control" id="location" name="location" placeholder="Location" required="" type="text" ng-model="formData.location" googleplace/>
 					</div>
 
 					<div class="form-group">
@@ -30,45 +48,30 @@
 						  	<option>13</option>
 						  	<option>14</option>
 						  	<option>15</option>
-						  	<option>16</option>
-						  
+						  	<option>16</option>						  
 						</select>
 					</div>
-					<br>
-					<div class="form-group pull-right">
-						<button class="btn btn-default" ng-click="reset()">Reset</button>
-					    <button class="btn btn-info" ng-click="update()">Submit</button>
-					</div>	
-      			</form>
-            </div>
-            <!-- report box -->
-            //this is to select the accident category from the given options
-            <div class="col-md-4 col-sm-12 col-xs-12">
-            	<form class="form-horizontal" style="padding: 40px">
+
 					<div class="form-group">
-                        <label>Day:</label><br>
+                        <label>Category:</label><br>
                         <label class="radio-inline">
-                            <input type="radio" name="options" ng-model="formData.report" value="Car accident">CarAccident
+                            <input type="radio" name="options" ng-model="formData.category" value="Car accident">CarAccident
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="options" ng-model="formData.report" value="Road closure">RoadClosure
+                            <input type="radio" name="options" ng-model="formData.category" value="Road closure">RoadClosure
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="options" ng-model="formData.report" value="Construction">Construction
+                            <input type="radio" name="options" ng-model="formData.category" value="Construction">Construction
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="options" ng-model="formData.report" value="Other">Other
+                            <input type="radio" name="options" ng-model="formData.category" value="Other">Other
                         </label>
 					</div>
-					
-					
-					<br>
 					<div class="form-group pull-right">
 						<button class="btn btn-default" ng-click="reset()">Reset</button>
 					    <button class="btn btn-info" ng-click="update()">Report</button>
 					</div>	
       			</form>
             </div>
-	</div>
 	
 </div>

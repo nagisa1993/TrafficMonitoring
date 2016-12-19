@@ -139,7 +139,6 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
                 // save all markers to tmp for checkbox  
                 $scope.tmp = markers;  
                 $scope.Markers = markers;
-                console.log($scope.Markers);
 
                 // after we obtain the incidents according to Weather, Day and Severity,
                 // send back the results to Results database
@@ -219,7 +218,7 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
             if(e == true)
                 check.push(index);
         });
-        console.log(check);
+
         if(check.length == 0)
             $scope.Markers = [];
         else{
@@ -229,9 +228,8 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
                     return obj.severity == e;
                 }));
             });
+            console.log($scope.Markers);
         }
-        
-        console.log($scope.Markers);
-        //console.log(check);
+
     }, true); 
 });
