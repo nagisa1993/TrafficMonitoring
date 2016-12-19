@@ -8,19 +8,17 @@ from sklearn.feature_extraction import DictVectorizer
 from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import train_test_split
 
-###########################################################
+################################################################
 # use svm to curve traffic data and predict delay for route direction
 # author: Yichen
-###########################################################
+################################################################
 
 def get_data():
     client = MongoClient('localhost', 27017);
     db = client.test;
     incidents = db.incidents;
-    delaydict = {};
-    cntdict = {};
-    feature = [];
-    delay = [];
+    delaydict, cntdict, sevdict, cntsev = {}, {}, {}, {};
+    feature, delay, severity, sev_avg = [], [], [], [];
     for doc in incidents.find():
         if doc['type'] != 'Congestion/Flow':
             continue;
@@ -43,8 +41,13 @@ def get_data():
                 if (doc['roadName'], hr % 24, doc['severity']) not in delaydict:
                     delaydict[(doc['roadName'], hr % 24, doc['severity'])] = 0;
                     cntdict[(doc['roadName'], hr % 24, doc['severity'])] = 0;
+                if (doc['roadName'], hr % 24) not in sevdict:
+                    sevdict[(doc['roadName'], hr % 24)] = 0;
+                    cntsev[(doc['roadName'], hr % 24)] = 0;
                 delaydict[(doc['roadName'], hr % 24, doc['severity'])] += doc['delayFromTypical'];
                 cntdict[(doc['roadName'], hr % 24, doc['severity'])] += 1;
+                sevdict[(doc['roadName'], hr % 24)] += doc['severity'];
+                cntsev[(doc['roadName'], hr % 24)] += 1;
         else:
             for hr in range(st.hour, et.hour + (et.day - st.day) * 24 + 1):
                 # data = [hr % 24, doc['location']['lat'], doc['location']['lng']];
@@ -55,8 +58,13 @@ def get_data():
                 if (doc['roadName'], hr % 24, doc['severity']) not in delaydict:
                     delaydict[(doc['roadName'], hr % 24, doc['severity'])] = 0;
                     cntdict[(doc['roadName'], hr % 24, doc['severity'])] = 0;
+                if (doc['roadName'], hr % 24) not in sevdict:
+                    sevdict[(doc['roadName'], hr % 24)] = 0;
+                    cntsev[(doc['roadName'], hr % 24)] = 0;
                 delaydict[(doc['roadName'], hr % 24, doc['severity'])] += doc['delayFromTypical'];
                 cntdict[(doc['roadName'], hr % 24, doc['severity'])] += 1;
+                sevdict[(doc['roadName'], hr % 24)] += doc['severity'];
+                cntsev[(doc['roadName'], hr % 24)] += 1;
         #print doc['startTime'] + "\t" + doc['endTime'] + "\t" + str(doc['location']['lat']) + "\t" + str(doc['location']['lng']);
     # print delaydict;
     # print cntdict;
@@ -65,29 +73,42 @@ def get_data():
         feature.append(data);
         avg = delaydict[key] / cntdict[key];
         delay.append(avg);
+    for key, value in sevdict.iteritems():
+        data = {'road': key[0], 'time': key[1]};
+        severity.append(data);
+        avg = sevdict[key] / cntsev[key];
+        sev_avg.append(avg);
     vec = DictVectorizer();
+    vec_sev = DictVectorizer();
     feature = np.array(feature);
     feature = vec.fit_transform(feature).toarray();
+    severity = np.array(severity);
+    severity = vec_sev.fit_transform(severity).toarray();
     delay = np.array(delay, dtype=float);
-    # scaler = preprocessing.StandardScaler().fit(feature);
-    # poly = PolynomialFeatures(2);
-    # print feature;
-    # print delay;
-    return feature, delay;
+    sev_avg = np.array(sev_avg, dtype=float);
+    return feature, delay, severity, sev_avg;
     # return;
     # return scaler.transform(feature), delay;
     # return poly.fit_transform(feature), delay;
-def svm_train():
-    feature, delay = get_data();
+def mlp_train():
+    feature, delay, severity, sev_avg = get_data();
     print feature.shape;
     print delay.shape;
+    print severity.shape;
+    print sev_avg.shape;
     X_train, X_test, y_train, y_test = train_test_split(feature, delay, test_size=0.05);
-    mlp_adam = MLPRegressor(solver='lbfgs', activation='logistic', learning_rate='constant', learning_rate_init=0.1,
+    X_train_sev, X_test_sev, y_train_sev, y_test_sev = train_test_split(severity, sev_avg, test_size=0.05);
+    mlp_delay = MLPRegressor(solver='lbfgs', activation='logistic', learning_rate='constant', learning_rate_init=0.1,
                             max_iter=1000).fit(X_train,y_train);
-    print "test_size: " + str(0.05) + "\trate: " + str(mlp_adam.score(X_test, y_test)) + "\tloss: " + str(mlp_adam.loss_);
+    mlp_sev = MLPRegressor(solver='lbfgs', activation='logistic', learning_rate='constant', learning_rate_init=0.05,
+                            max_iter=5000).fit(X_train_sev, y_train_sev);
+    print "test_size: " + str(0.05) + "\ttype: delay";
+    print "rate: " + str(mlp_delay.score(X_test, y_test)) + "\tloss: " + str(mlp_delay.loss_);
+    print "test_size: " + str(0.05) + "\ttype: severity";
+    print "rate: " + str(mlp_sev.score(X_test_sev, y_test_sev)) + "\tloss: " + str(mlp_sev.loss_);
     return;
 
-def svm_predict(time = 0, lat = 43, lng = 43):
+def mlp_predict(roadName='I95', time=16, severity=2):
     return;
 
 def dump():
@@ -133,4 +154,4 @@ def test():
     print delay;
     print delay.shape[0];
 if __name__ == "__main__":
-    svm_train();
+    mlp_train();
