@@ -24,23 +24,23 @@
 		<nav id="slide-menu">
 	        <ul>
 	            <li class="titlebrand">Traffic Monitoring</li>
-	            <li>
-	                <a href="/" class="active">Map<!-- <span class="glyphicon glyphicon-dashboard pull-right"></span> --></a>
+	            <li ng-class="{'active': $route.current.activetab == 'home'}">
+	                <a href="home">Map</a>
 	            </li>
-	            <li>
-	                <a href="/history">History <!-- <span class="glyphicon glyphicon-star pull-right"></span> --></a>
+	            <li ng-class="{'active': $route.current.activetab == 'history'}">
+	                <a href="history">History</a>
 	            </li>
-				<li>
-					<a href="/hotspot">Hotspot </a>
+				<li ng-class="{'active': $route.current.activetab == 'hotspot'}">
+					<a href="hotspot">Hotspot </a>
 				</li>
-	            <li>
-	                <a href="/help">Help <!-- <span class="glyphicon glyphicon-question-sign pull-right"></span> --></a>
+	            <li ng-class="{'active': $route.current.activetab == 'help'}">
+	                <a href="help">Help</a>
 	            </li>
-	            <li>
-	                <a href="/userupload">Upload <!-- <span class="glyphicon glyphicon-envelope pull-right"></span> --></a>
+	            <li ng-class="{'active': $route.current.activetab == 'userupload'}">
+	                <a href="userupload">Upload</a>
 	            </li>     
-	            <li>
-	                <a href="/contact">Contact <!-- <span class="glyphicon glyphicon-envelope pull-right"></span> --></a>
+	            <li ng-class="{'active': $route.current.activetab == 'contact'}">
+	                <a href="contact">Contact</a>
 	            </li>                 
 	        </ul>  
 		</nav>

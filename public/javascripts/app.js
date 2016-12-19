@@ -7,42 +7,38 @@ var app = angular.module("MyApp", ['ngRoute', 'uiGmapgoogle-maps', 'MainCtrl', '
 app.config(function($routeProvider, $locationProvider) {
     //$locationProvider.hashPrefix('!');
     $routeProvider.
-      when("/", {
+      when("/home", {
         templateUrl: "partials/index.html",
-        controller: "MainCtrl"
+        controller: "MainCtrl",
+        activetab: "home"
       }).
       when("/history", { 
         templateUrl: "partials/history.html",
-        controller: "HisCtrl"
+        controller: "HisCtrl",
+        activetab: "history"
       }).
       when("/hotspot", { 
         templateUrl: "partials/hotspot.html",
-        controller: "HspCtrl"
+        controller: "HspCtrl",
+        activetab: "hotspot"
       }).
       when("/userupload", { 
         templateUrl: "partials/userupload.html",
-        controller: "UsrUpldCtrl"
+        controller: "UsrUpldCtrl",
+        activetab: "userupload"
       }).
       when("/help", { 
-        templateUrl: "partials/help.html" 
+        templateUrl: "partials/help.html",
+        activetab: "help"
       }).
       when("/contact", { 
-        templateUrl: "partials/contact.html" 
+        templateUrl: "partials/contact.html",
+        activetab: "contact"
       }).
-      otherwise( { redirectTo: "/" });
+      otherwise( { redirectTo: "/home", activetab: "home" });
 
       // use the HTML5Mode History API
       $locationProvider.html5Mode(true);
+}).run(function ($rootScope, $route) {
+    $rootScope.$route = $route;
 });
-
-
-//change "active" navbar-columns
-// app.controller("MainCtrl", function($scope, $location) {
-//   $scope.menuClass = function(page) {
-//     var current = $location.path().substring(1);
-//     console.log($scope.current);
-//     return page === current ? "active" : "";
-//   };
-//   $scope.current = $location.path().substring(1);
-//
-// });

@@ -24,6 +24,6 @@ ng-view {
 	margin-bottom: 20px;
 }
 
-.bg-grey {
-    background-color: #dfe5eb;
+.active {
+    background-color: rgba(252,254,255, 0.3);
 }
