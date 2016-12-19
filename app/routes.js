@@ -5,7 +5,7 @@
 var History = require('./models/model');
 var Incidents = require('./models/incidents');
 var Weathers = require('./models/weather');
-var Results = require('./models/result');
+var Reports = require('./models/report');
 
 // Opens App routes RESTful design
 module.exports = function(app) {
@@ -60,41 +60,6 @@ module.exports = function(app) {
     });
 
     /**************************************************************************/
-    /**                              Results                                 **/
-    /**************************************************************************/
-    app.get('/api/results', function(req, res) {
-        Results.find(function(err, results) {
-            if (err)
-                res.send(err);
-
-            res.json(results);
-        });
-    });
-
-    app.post('/api/results', function(req, res) {
-
-        // remove all results first, cuz results are just cache
-        Results.remove({}, function(err){
-            if(err)
-                console.log(err);
-            else
-                console.log("clean!");
-        });
-
-        for(var k = 0; k < req.body.length; k++){
-            var newresult = new Results(req.body[k]);
-            newresult.save(function(err){
-                if(err){return err;}
-                else console.log("Save");
-            });
-        }
-
-        // tell server it is done with saving
-        res.send("done");
-        res.end();
-    });
-
-    /**************************************************************************/
     /**                              Incident                                **/
     /**************************************************************************/
     // get all incidents
@@ -125,38 +90,46 @@ module.exports = function(app) {
         });
     });
 
-    // create a incident and send back all incidents after creation
-    app.post('/api/incidents', function(req, res) {
-        // create a incident
-        Results.find({
-            $or: [ 
-                { fromLocation: req.body.place}, 
-                { toLocation: req.body.place} 
-            ]
-        },function(err, incidents) {
-            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+    /**************************************************************************/
+    /**                              Reports                                 **/
+    /**************************************************************************/
+    app.get('/api/reports', function(req, res) {
+        Reports.find(function(err, reports) {
             if (err)
                 res.send(err);
-            var results = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
-            var incidentobj = function(){
-              this.getobjhour = function(){
-                return this.getHours();
-              };
-              return this;
-            };
-
-            for(var i = 0; i < incidents.length; i++){
-              var obj = incidentobj.apply(incidents[i].created_at);
-              var num = parseInt(obj.getobjhour());
-              results[num]++;
-            }
-
-            res.send(results);
-            res.end();
+            res.json(reports);
         });
     });
 
+    app.post('/api/reports', function(req, res) {
+
+        var newreport = new Reports(req.body);
+        newreport.save(function(err){
+            if(err)
+                res.send(err);
+
+            res.json(req.body);
+        });
+    });
+    
+    // delete a report
+    app.delete('/api/reports/:report_id', function(req, res) {
+        Reports.remove({
+            _id : req.params.report_id
+        }, function(err, reports) {
+            if (err)
+                res.send(err);
+
+            // get and return all the histories after you create another
+            Reports.find(function(err, reports) {
+                if (err)
+                    res.send(err);
+
+                res.json(reports);
+            });
+        });
+    });
     /**************************************************************************/
     /**                               Weather                                **/
     /**************************************************************************/
