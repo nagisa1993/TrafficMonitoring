@@ -13,9 +13,7 @@ usrUpldCtrl.controller('UsrUpldCtrl', function($scope, $http, $log, uiGmapGoogle
     // Do stuff with your $scope.
     // Note: Some of the directives require at least something to be defined originally!
     // e.g. $scope.markers = []
-    $scope.formData = { 
-        "report": "All",
-      };
+    $scope.formData = {};
 
     $http.get('/api/reports')
         .success(function(data){
