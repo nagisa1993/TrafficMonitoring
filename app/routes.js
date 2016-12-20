@@ -90,6 +90,30 @@ module.exports = function(app) {
         });
     });
 
+    app.post('/api/incidents', function(req, res) {
+        // use mongoose to get all incidents in the database
+        Incidents.find({roadName: req.body.roadName}, function(err, incidents) {
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            var results = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+            var incidentobj = function(){
+              this.getobjhour = function(){
+                return this.getHours();
+              };
+              return this;
+            };
+
+            for(var i = 0; i < incidents.length; i++){
+              // to calculate all incidents according to hours, we take created_at param
+              var obj = incidentobj.apply(incidents[i].created_at);
+              var num = parseInt(obj.getobjhour());
+              results[num]++;
+            }
+            res.send(results);
+            res.end();
+        });
+    });
+
     /**************************************************************************/
     /**                              Reports                                 **/
     /**************************************************************************/
