@@ -90,6 +90,7 @@ module.exports = function(app) {
         });
     });
 
+    // get all incidents for one route
     app.post('/api/incidents', function(req, res) {
         // use mongoose to get all incidents in the database
         Incidents.find({roadName: req.body.roadName}, function(err, incidents) {
