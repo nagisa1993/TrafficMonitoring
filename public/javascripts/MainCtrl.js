@@ -15,10 +15,15 @@ mainCtrl.config(['ChartJsProvider', function (ChartJsProvider) {
     });
   }]);
 
-mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi, uiGmapIsReady) {
+mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi, uiGmapIsReady, $compile) {
     // Do stuff with your $scope.
     // Note: Some of the directives require at least something to be defined originally!
     // e.g. $scope.markers = []
+    //$scope.setPanel = $compile(angular.element('<p>Choose your origin, destination and time, your direction will be displayed here</p>'););
+
+    $scope.setPanel = function (renderer) {
+    renderer.setPanel(document.getElementById('right-panel'));
+    }
     $scope.formData = {};
 /*-------------------------------------------------------------------------------------------------------*/
 /*                                          Draw chart                                                   */
@@ -90,6 +95,7 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
         .then(function(maps) {
             $scope.directionsService = new maps.DirectionsService();
             $scope.directionsDisplay = new google.maps.DirectionsRenderer();
+            $scope.geocoder = new google.maps.Geocoder();
         });
 
     uiGmapIsReady.promise(1)                     // this gets all (ready) map instances - defaults to 1 for the first map
@@ -97,6 +103,7 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
             instances.forEach(function(inst) {   // instances is an array object
                 $scope.maps = inst.map;
                 $scope.directionsDisplay.setMap(inst.maps); // if only 1 map it's found at index 0 of array
+                $scope.directionsDisplay.setPanel(document.getElementById('right-panel'));
             });
     });
 /*-------------------------------------------------------------------------------------------------------*/
@@ -115,6 +122,7 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
         $scope.directionsService.route(request, function (response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 $scope.directionsDisplay.setDirections(response);
+                $scope.directionsDisplay.setPanel(document.getElementById('right-panel'));
                 // for (var i = 0, len = response.routes.length; i < len; i++) {
                 //     new google.maps.DirectionsRenderer({
                 //         map: $scope.maps,

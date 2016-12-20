@@ -2,26 +2,8 @@
  
 <div class="content">
 	<div class="row">
-            <!-- map -->
-            <div class="col-md-8 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="card-title">
-                    <label style="padding-bottom:5px">Map</label>
-                </div>
-				<div id="map">
-					<ui-gmap-google-map center='map.center' zoom='map.zoom' id='maps'>
-						<ui-gmap-marker
-								coords="marker.coords"
-								options="marker.options"
-								events="marker.events"
-								idkey="marker.id">
-						</ui-gmap-marker>
-					</ui-gmap-google-map>
-					</div>
-				</div>
-            </div>
             <!-- form -->
-            <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="col-md-3 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="card-title">
                     <label style="padding-bottom:5px">Please fill in the form</label>
@@ -72,23 +54,50 @@
       			</form>
       			</div>
             </div>
+            <!-- map -->
+            <div class="col-md-5 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-title">
+                    <label style="padding-bottom:5px">Map</label>
+                </div>
+				<div id="map">
+					<ui-gmap-google-map center='map.center' zoom='map.zoom' id='maps'>
+						<ui-gmap-marker
+								coords="marker.coords"
+								options="marker.options"
+								events="marker.events"
+								idkey="marker.id">
+						</ui-gmap-marker>
+					</ui-gmap-google-map>
+					</div>
+				</div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+            	<div class="card">
+	                <div class="card-title">
+	                    <label style="padding-bottom:5px">Direction</label>
+	                </div>
+	                <div id="right-panel">{{setPanel}}</div>
+	            </div>
+            </div>
 	</div>
 	<div class="row">
-		<div class="col-md-6 col-xs-12">
-			<div class="card">
-                <div class="card-title">
-                    <label style="padding-bottom:5px">Traffic pattern along the specific route:</label>
-                </div>			
-			<canvas class="chart chart-line" chart-data="chartdata1" chart-labels="labels1"></canvas> 
-			</div>
-		</div>
-		<div class="col-md-6 col-xs-12">
-			<div class="card">
-                <div class="card-title">
-                    <label style="padding-bottom:5px">Traffic pattern for selected location: {{pin.location}}</label>
-                </div>	
-			<canvas class="chart chart-line" chart-data="chartdata2" chart-labels="labels2"></canvas>
-			</div>
-		</div>
+	<div class="col-md-6 col-xs-12">
+		<div class="card">
+		            <div class="card-title">
+		                <label style="padding-bottom:5px">Traffic pattern along the specific route:</label>
+		            </div>			
+				<canvas class="chart chart-line" chart-data="chartdata1" chart-labels="labels1"></canvas> 
+				</div>
 	</div>
+	<div class="col-md-6 col-xs-12">
+		<div class="card">
+	            <div class="card-title">
+	                <label style="padding-bottom:5px">Traffic pattern for selected location: {{pin.location}}</label>
+	            </div>	
+				<canvas class="chart chart-line" chart-data="chartdata2" chart-labels="labels2"></canvas>
+				</div>
+	</div>
+
+    </div>
 </div>
