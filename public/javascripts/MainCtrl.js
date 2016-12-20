@@ -116,11 +116,21 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
             origin: $scope.ori_detail.geometry.location,
             destination: $scope.des_detail.geometry.location,
             travelMode: google.maps.TravelMode.DRIVING,
-            optimizeWaypoints: true
+            optimizeWaypoints: true,
+            provideRouteAlternatives: true
         }
         $scope.directionsDisplay.setMap($scope.maps);
         $scope.directionsService.route(request, function (response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
+                // show all reference routes
+                for (var i = 0, len = response.routes.length; i < len; i++) {
+                    new google.maps.DirectionsRenderer({
+                        map: $scope.maps,
+                        directions: response,
+                        routeIndex: i
+                    });
+                }
+                
                 $scope.directionsDisplay.setDirections(response);
                 $scope.isPanelSet = true;
                 $scope.directionsDisplay.setPanel(document.getElementById('right-panel'));
