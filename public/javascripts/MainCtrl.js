@@ -20,9 +20,9 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
     // Note: Some of the directives require at least something to be defined originally!
     // e.g. $scope.markers = []
     //$scope.setPanel = $compile(angular.element('<p>Choose your origin, destination and time, your direction will be displayed here</p>'););
-
+    $scope.isPanelSet = false;
     $scope.setPanel = function (renderer) {
-    renderer.setPanel(document.getElementById('right-panel'));
+        renderer.setPanel(document.getElementById('right-panel'));
     }
     $scope.formData = {};
 /*-------------------------------------------------------------------------------------------------------*/
@@ -122,6 +122,7 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
         $scope.directionsService.route(request, function (response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 $scope.directionsDisplay.setDirections(response);
+                $scope.isPanelSet = true;
                 $scope.directionsDisplay.setPanel(document.getElementById('right-panel'));
                 // for (var i = 0, len = response.routes.length; i < len; i++) {
                 //     new google.maps.DirectionsRenderer({

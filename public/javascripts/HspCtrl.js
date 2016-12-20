@@ -24,6 +24,7 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
         "severity": "All"
     };
 
+    $scope.isPanelSet = false;
     $scope.checkbox = [true, true, true, true, true]; // severity filter checkboxes
     $scope.tmp = []; // tmp Markers objects
     $scope.querydata = []; // query data response from API
@@ -153,6 +154,7 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
 
             $scope.events = {
                     click: function(marker, eventName, model){
+                        $scope.isPanelSet = true;
                         // eventName is the name of event, e.g.: "click"
                         // model is the marker that we click, it contain the key we save before
                         // marker is google map marker object, we can define the attr, like "marker.showWindow=true"
