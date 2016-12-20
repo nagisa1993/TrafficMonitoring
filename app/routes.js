@@ -92,8 +92,14 @@ module.exports = function(app) {
 
     // get all incidents for one route
     app.post('/api/incidents', function(req, res) {
+        console.log(req.body.roadName);
         // use mongoose to get all incidents in the database
-        Incidents.find({roadName: req.body.roadName}, function(err, incidents) {
+        Incidents.find({}, function(err, incidents) {
+            var inci = incidents.filter(function(obj){
+                if(req.body.roadName.includes(obj.roadName)){
+                    return obj;
+                }
+            });
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             var results = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
@@ -104,14 +110,17 @@ module.exports = function(app) {
               return this;
             };
 
-            for(var i = 0; i < incidents.length; i++){
+            for(var i = 0; i < inci.length; i++){
               // to calculate all incidents according to hours, we take created_at param
-              var obj = incidentobj.apply(incidents[i].created_at);
+              var obj = incidentobj.apply(inci[i].created_at);
               var num = parseInt(obj.getobjhour());
               results[num]++;
             }
-            res.send(results);
-            res.end();
+
+            
+                res.send(results);
+                res.end();
+  
         });
     });
 
@@ -362,7 +371,7 @@ module.exports = function(app) {
         var spawn = require('child_process').spawn,
             py    = spawn('python', ['./scripts/mlp.py']),
             datastring = "",
-            roadname = req.query.roadname,
+            roadname = decodeURI(req.query.roadname),
             time = req.query.time,
             severity = req.query.severity,
             tuple = [roadname, time, severity];

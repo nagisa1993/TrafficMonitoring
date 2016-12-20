@@ -109,9 +109,10 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
 /*-------------------------------------------------------------------------------------------------------*/
 /*                                          Form Controller                                              */
 /*-------------------------------------------------------------------------------------------------------*/
+
     $scope.update = function() {
-        console.log($scope.ori_detail.geometry.location);
-        console.log($scope.des_detail.geometry.location);
+        // console.log($scope.ori_detail.name);
+        // console.log($scope.des_detail.name);
         var request = {
             origin: $scope.ori_detail.geometry.location,
             destination: $scope.des_detail.geometry.location,
@@ -119,21 +120,59 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
             optimizeWaypoints: true,
             provideRouteAlternatives: true
         }
+        $scope.timebuffer = $scope.formData.time;
         $scope.directionsDisplay.setMap($scope.maps);
         $scope.directionsService.route(request, function (response, status) {
+            $scope.road_summary_arr = [];
+            $scope.road_num_arr = [];
+            $scope.road_factor_arr = [];
+            $scope.sendcontent = {};
             if (status == google.maps.DirectionsStatus.OK) {
                 // show all reference routes
-                for (var i = 0, len = response.routes.length; i < len; i++) {
+                // for (var i = 0, len = response.routes.length; i < len; i++) {
+                response.routes.forEach(function(routes,i){
                     new google.maps.DirectionsRenderer({
                         map: $scope.maps,
                         directions: response,
                         routeIndex: i
                     });
-                }
 
+                    $scope.sendcontent.roadName = routes.summary;
+                    //console.log($scope.sendcontent);
+                    $scope.road_num_arr.push(callhttp($scope.sendcontent));
+                    //return $http.post('/api/incidents', $scope.sendcontent);
+
+                });
+
+                function callhttp(content){
+                    console.log(content);
+                    $http.post('/api/incidents', content)
+                    .then(function(res){
+                        return res.data;
+                    });
+                    
+                };
+
+                            // Once complete, clear the form (except location)
+                            // if(data.length > 0){
+                            //     $http.get('/api/prediction?roadname='+routes.summary+'&time='+$scope.timebuffer+'severity=2')
+                            //         .success(function (pre){
+                            //             $scope.road_factor_arr.push(pre);
+                            //         })
+                            //         .error(function (err){
+                            //            console.log('Error: ' + err);
+                            //         });
+                            // }
+                            //$scope.road_num_arr.push(data);
+                            //$scope.road_summary_arr.push(routes.summary);
+                
                 $scope.directionsDisplay.setDirections(response);
                 $scope.isPanelSet = true;
                 $scope.directionsDisplay.setPanel(document.getElementById('right-panel'));
+                
+                //$scope.series = $scope.road_summary_arr;
+                $scope.chartdata1 = $scope.road_num_arr;
+                //console.log($scope.chartdata1);
             }
         });
 

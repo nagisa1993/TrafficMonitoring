@@ -93,7 +93,7 @@ def mlp_predict_delay(roadname='Route 27', time=18, severity=2):
     vec = joblib.load('./scripts/vec.pkl')   # load from "app/route.js" for REST API
     mlp = joblib.load('./scripts/mlp_delay.pkl')
     # print "done"
-    print "hello delay"
+    # print "hello delay"
     z = np.array([{'road': roadname, 'time': time, 'severity': severity}])
     z = vec.transform(z)
     result = mlp.predict(z)
@@ -165,8 +165,8 @@ def read_in():
 
 def main():
     lines = read_in()
-    print lines[0], lines[1], lines[2]
-    sys.stdout.write("yes")
+    # print lines[0], lines[1], lines[2]
+    # sys.stdout.write("yes")
     delay = mlp_predict_delay(lines[0], int(lines[1]), int(lines[2]))
     incidents = mlp_predict_sev(lines[0], int(lines[1]), int(lines[2]))
     print json.dumps({'delay': delay, 'incidents': incidents})
@@ -176,6 +176,7 @@ def main():
 if __name__ == "__main__":
     # mlp_train();
     # for i in range(0,24):
-    #     mlp_predict_sev('Route 27', i, 2);
+    #     mlp_predict_delay('I-287', i, 2)
+    #     mlp_predict_sev('I-287', i, 2)
     main()
     # sys.stdout.close()
