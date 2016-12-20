@@ -63,31 +63,31 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
             }
         }
     };
-    $scope.marker = {
-        id: 0,
-        coords: {
-            latitude: 40.523325,
-            longitude: -74.458809
-        },
-        options: {
-            draggable: true
-        },
-        events: {
-            dragend: function (marker, eventName, args) {
-                var lat = marker.getPosition().lat();
-                var lon = marker.getPosition().lng();
-                // $log.log(lat);
-                // $log.log(lon);
+    // $scope.marker = {
+    //     id: 0,
+    //     coords: {
+    //         latitude: 40.523325,
+    //         longitude: -74.458809
+    //     },
+    //     options: {
+    //         draggable: true
+    //     },
+    //     events: {
+    //         dragend: function (marker, eventName, args) {
+    //             var lat = marker.getPosition().lat();
+    //             var lon = marker.getPosition().lng();
+    //             // $log.log(lat);
+    //             // $log.log(lon);
 
-                $scope.marker.options = {
-                    draggable: true,
-                    labelContent: "",
-                    labelAnchor: "100 0",
-                    labelClass: "marker-labels"
-                };
-            }
-        }
-    };
+    //             $scope.marker.options = {
+    //                 draggable: true,
+    //                 labelContent: "",
+    //                 labelAnchor: "100 0",
+    //                 labelClass: "marker-labels"
+    //             };
+    //         }
+    //     }
+    // };
 
     // uiGmapGoogleMapApi is a promise.
     // The "then" callback function provides the google.maps object.
@@ -110,8 +110,8 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
 /*                                          Form Controller                                              */
 /*-------------------------------------------------------------------------------------------------------*/
     $scope.update = function() {
-        // console.log($scope.ori_detail.name);
-        // console.log($scope.des_detail.name);
+        console.log($scope.ori_detail.geometry.location);
+        console.log($scope.des_detail.geometry.location);
         var request = {
             origin: $scope.ori_detail.geometry.location,
             destination: $scope.des_detail.geometry.location,
@@ -130,17 +130,10 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
                         routeIndex: i
                     });
                 }
-                
+
                 $scope.directionsDisplay.setDirections(response);
                 $scope.isPanelSet = true;
                 $scope.directionsDisplay.setPanel(document.getElementById('right-panel'));
-                // for (var i = 0, len = response.routes.length; i < len; i++) {
-                //     new google.maps.DirectionsRenderer({
-                //         map: $scope.maps,
-                //         directions: response,
-                //         routeIndex: i
-                //     });
-                // }
             }
         });
 

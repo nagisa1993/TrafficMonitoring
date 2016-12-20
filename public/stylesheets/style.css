@@ -14,6 +14,7 @@ body, html {
 ng-view {
 	padding-left: 10px;
 	padding-top: 10px;
+    overflow: scroll;
 }
 
 .angular-google-map-container {

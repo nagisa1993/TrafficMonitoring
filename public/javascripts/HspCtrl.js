@@ -18,6 +18,7 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
     // Do stuff with your $scope.
     // Note: Some of the directives require at least something to be defined originally!
     // e.g. $scope.markers = []
+    $scope.showheatmap = true;
     $scope.formData = {
         "day": "All",
         "weather": "All",
@@ -98,6 +99,7 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
             .success(function (data) {
                 $scope.querydata = data;
                 let markers = [];
+                dataPoints = []; // clear datapoints for reuse
                 for(let i = 0; i < data.length; i++){
                     let newmarker = {};
                     newmarker.latitude = data[i].location.lat;
@@ -132,11 +134,11 @@ hotCtrl.controller('HspCtrl', function($scope, $http, $log, $timeout, uiGmapGoog
                 // update Markers 
                 $scope.Markers = markers;
                 // update Heatmap
+                console.log(dataPoints);
                 $scope.heatmap = new google.maps.visualization.HeatmapLayer({
                     data: dataPoints,
                     map: $scope.maps
                 });
-                dataPoints = []; // clear datapoints for reuse
 
                 // update chart 1
                 var a = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
