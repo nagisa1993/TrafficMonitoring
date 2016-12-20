@@ -327,5 +327,35 @@ module.exports = function(app) {
         } 
                               
     });
+
+    /**************************************************************************/
+    /**             Delay and num of incidents prediction                    **/
+    /**************************************************************************/
+    // get prediction json
+    app.get('/api/prediction', function(req, res) {
+        // console.log("hello");
+        var spawn = require('child_process').spawn,
+            py    = spawn('python', ['./scripts/mlp.py']),
+            datastring = "",
+            roadname = req.query.roadname,
+            time = req.query.time,
+            severity = req.query.severity,
+            tuple = [roadname, time, severity];
+        console.log(tuple);
+        py.stdout.on('data', function (data) {
+            // console.log(data);
+            // console.log("successful");
+            console.log("before data write");
+            datastring += data.toString();
+        });
+        py.stdout.on('end', function (data) {
+            console.log("done");
+            console.log(datastring);
+            res.send(datastring);
+        });
+        py.stdin.write(JSON.stringify(tuple));
+        py.stdin.end();
+    });
+
 };
 
