@@ -19,6 +19,10 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
     // Do stuff with your $scope.
     // Note: Some of the directives require at least something to be defined originally!
     // e.g. $scope.markers = []
+    $scope.isPanelSet = false;
+    $scope.setPanel = function (renderer) {
+        renderer.setPanel(document.getElementById('right-panel'));
+    }
     $scope.formData = {};
 /*-------------------------------------------------------------------------------------------------------*/
 /*                                          Draw chart                                                   */
@@ -90,6 +94,7 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
         .then(function(maps) {
             $scope.directionsService = new maps.DirectionsService();
             $scope.directionsDisplay = new google.maps.DirectionsRenderer();
+            $scope.geocoder = new google.maps.Geocoder();
         });
 
     uiGmapIsReady.promise(1)                     // this gets all (ready) map instances - defaults to 1 for the first map
@@ -97,6 +102,7 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
             instances.forEach(function(inst) {   // instances is an array object
                 $scope.maps = inst.map;
                 $scope.directionsDisplay.setMap(inst.maps); // if only 1 map it's found at index 0 of array
+                $scope.directionsDisplay.setPanel(document.getElementById('right-panel'));
             });
     });
 /*-------------------------------------------------------------------------------------------------------*/
@@ -105,7 +111,7 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
     $scope.update = function() {
         // console.log($scope.ori_detail.name);
         // console.log($scope.des_detail.name);
-       var request = {
+        var request = {
             origin: $scope.ori_detail.geometry.location,
             destination: $scope.des_detail.geometry.location,
             travelMode: google.maps.TravelMode.DRIVING,
@@ -116,6 +122,8 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
         $scope.directionsService.route(request, function (response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 // $scope.directionsDisplay.setDirections(response);
+                $scope.isPanelSet = true;
+                $scope.directionsDisplay.setPanel(document.getElementById('right-panel'));
                 for (var i = 0, len = response.routes.length; i < len; i++) {
                     new google.maps.DirectionsRenderer({
                         map: $scope.maps,
