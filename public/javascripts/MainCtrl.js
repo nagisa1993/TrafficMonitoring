@@ -109,7 +109,8 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
 /*-------------------------------------------------------------------------------------------------------*/
 /*                                          Form Controller                                              */
 /*-------------------------------------------------------------------------------------------------------*/
-    $scope.update = function() {
+
+        $scope.update = function() {
         // console.log($scope.ori_detail.name);
         // console.log($scope.des_detail.name);
         var request = {
@@ -119,17 +120,43 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
             optimizeWaypoints: true,
             provideRouteAlternatives: true
         }
+        $scope.timebuffer = $scope.formData.time;
         $scope.directionsDisplay.setMap($scope.maps);
         $scope.directionsService.route(request, function (response, status) {
+            $scope.road_summary_arr = [];
+            $scope.road_num_arr = [];
+            $scope.road_factor_arr = [];
             if (status == google.maps.DirectionsStatus.OK) {
                 // show all reference routes
-                for (var i = 0, len = response.routes.length; i < len; i++) {
+                // for (var i = 0, len = response.routes.length; i < len; i++) {
+                response.routes.forEach(function(routes,i){
                     new google.maps.DirectionsRenderer({
                         map: $scope.maps,
                         directions: response,
                         routeIndex: i
                     });
-                }
+                    var result = function(){
+                        return routes.summary
+                    };
+                    $http.get('/api/incidents', result)
+                        .success(function (data) {
+                            // Once complete, clear the form (except location)
+                            if(data.length > 0){
+                                $http.get('/api/prediction?roadname='+routes.summary+'&time='+$scope.timebuffer+'severity=2')
+                                    .success(function (pre){
+                                        $scope.road_factor_arr.push(pre);
+                                    })
+                                    .error(function (err){
+                                       console.log('Error: ' + err);
+                                    });
+                            }
+                            $scope.road_num_arr.push(data);
+                            $scope.road_summary_arr.push(routes.summary);
+                        })
+                        .error(function (data) {
+                            console.log('Error: ' + data);
+                        });
+                });
                 
                 $scope.directionsDisplay.setDirections(response);
                 $scope.isPanelSet = true;
@@ -141,6 +168,9 @@ mainCtrl.controller('MainCtrl', function($scope, $http, $log, uiGmapGoogleMapApi
                 //         routeIndex: i
                 //     });
                 // }
+                console.log($scope.road_summary_arr);
+                console.log($scope.road_num_arr);
+                console.log($scope.road_factor_arr);
             }
         });
 
