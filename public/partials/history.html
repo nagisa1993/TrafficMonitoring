@@ -1,19 +1,39 @@
 <!--Created by mahaiyue on 10/10/16.-->
-<div id="history"> <!-- ng-controller="HisCtrl" -->
+<div id="history" class="content"> <!-- ng-controller="HisCtrl" -->
 	<table class="table table-striped">
 	  <thead>
-	  	<th>Origin</th>
-	  	<th>Destination</th>
-	  	<th style="text-align: center">Time</th>
-		<th style="text-align: center">Delete</th>
+	  	<th ng-click ="sortData('ori')" style="width:40%"><span ng-show="sortColumn == 'ori' && !reverseSort" class="glyphicon glyphicon-triangle-bottom"></span>
+            <span ng-show="sortColumn == 'ori' && reverseSort" class="glyphicon glyphicon-triangle-top"></span>Origin</th>
+	  	<th ng-click ="sortData('des')" style="width:40%"><span ng-show="sortColumn == 'des' && !reverseSort" class="glyphicon glyphicon-triangle-bottom"></span>
+            <span ng-show="sortColumn == 'des' && reverseSort" class="glyphicon glyphicon-triangle-top"></span>Destination</th>
+	  	<th ng-click ="sortData('time')" style="width:10%"><span ng-show="sortColumn == 'time' && !reverseSort" class="glyphicon glyphicon-triangle-bottom"></span>
+            <span ng-show="sortColumn == 'time' && reverseSort" class="glyphicon glyphicon-triangle-top"></span>Time</th>
+	  	<!-- <th style="text-align: center;" ng-click ="sortData('created_at')"><span ng-show="sortColumn == 'created_at' && !reverseSort" class="glyphicon glyphicon-triangle-bottom"></span>
+            <span ng-show="sortColumn == 'created_at' && reverseSort" class="glyphicon glyphicon-triangle-top"></span>Date</th> -->
+		<th style="text-align: center;width:10%">Delete</th>
 	  </thead>
 	  <tbody>
-	  	<tr ng-repeat="x in historys">
+	  	<tr ng-repeat="x in historys | orderBy:sortColumn:reverseSort">
 	  		<td>{{x.ori}}</td>
 	  		<td>{{x.des}}</td>
-	  		<td style="text-align: center">{{x.time}}</td>
+	  		<td style="text-align: center;">{{x.time}}</td>
+	  		<!-- <td style="text-align: center">{{x.created_at|date:"mediumDate"}}</td> -->
 			<td style="text-align: center"><span class="glyphicon glyphicon-remove" ng-click="deleteHistory(x._id)"></span></td>
 	  	</tr>
 	  </tbody>
 	</table>
+
+	<div class="card">
+		<div class="card-title">
+			<label style="padding-bottom:5px">Statistics for travel time</label>
+		</div>  
+		<div class="row">
+			<div class="col-md-6 col-sm-12 col-xs-12">
+				<canvas class="chart chart-pie" chart-data="chartdata" chart-labels="labels"></canvas> 
+			</div>
+			<div class="col-md-6 col-sm-12 col-xs-12">
+				<canvas class="chart chart-bar" chart-data="chartdata" chart-labels="labels"></canvas>
+			</div> 
+		</div>    
+	</div>
 </div>

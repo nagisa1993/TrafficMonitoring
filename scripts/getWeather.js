@@ -65,6 +65,9 @@ function roundTime(hr, min){
     return dicthr[i] + ":" + dict[dicthr[i]];
 }
 function run(){
+    var time = new Date();
+    var cur_minute = time.getMinutes();
+    if(cur_minute < 30) setTimeout(run, 1800000);
     weather = getWeather();
     setTimeout(run, 3600000);
 }

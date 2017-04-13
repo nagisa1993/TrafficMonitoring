@@ -7,7 +7,7 @@
 /*Phone view*/
 @media only screen and (max-width: 600px){
 #slide-menu {
-  background-color: #2aadd3;
+  background-image: url(http://41.media.tumblr.com/e080e1ee76eb7d354465383348d84a01/tumblr_nhibg801IT1s2077ko1_500.jpg);
   position: fixed;
   top: -100px;
   left: 0;
@@ -37,6 +37,8 @@
 #slide-menu .titlebrand{
   font-size: 20px;
   padding: 20px;
+  color: white;
+  font-weight: bold;
 }
 
 #slide-menu > ul li a{
@@ -52,8 +54,8 @@
 }
 
   #slide-menu > ul li a:hover{
-    background-color: #7bcde5;
-    color: #454545;
+    background-color: rgba(252,254,255, 0.3);
+    font-weight: bold;
   }
 
   #slide-menu > ul li:before {
@@ -84,7 +86,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 60px;
+    padding: 20px;
     overflow: scroll;
     background: #fcfeff;
     border-radius: 0;
@@ -98,7 +100,7 @@
     -webkit-transition: all 300ms;
     transition: all 300ms;
   }
-  #main-content div.menu-trigger {
+  .menu-trigger {
     position: fixed;
     top: 10px;
     left: 10px;
@@ -112,20 +114,16 @@
     transition: all 300ms;
   }
 
-  #main-content div.menu-trigger .glyphicon{
+  .glyphicon{
     color: black;
     margin: 10px;
   }
 
-  #main-content div.menu-trigger:hover {
-    background: #2aadd3;
+  .glyphicon:hover {
+    color: grey;
   }
 
-  #main-content div.menu-trigger .glyphicon:hover {
-    color: white;
-  }
-
-  #main-content div.menu-trigger:hover:before {
+  .menu-trigger:hover:before {
     color: #fcfeff;
   }
 
@@ -142,7 +140,8 @@
 /*Desktop view*/
 @media only screen and (min-width: 600px){
   #slide-menu {
-  background-color: #2aadd3;
+  /*background-color: #2aadd3;*/
+  background-image: url(http://41.media.tumblr.com/e080e1ee76eb7d354465383348d84a01/tumblr_nhibg801IT1s2077ko1_500.jpg);
   position: fixed;
   top: 0;
   left: -100px;
@@ -169,8 +168,10 @@
   }
 
 #slide-menu .titlebrand{
-  font-size: 20px;
+  font-size: 17px;
   padding: 20px;
+  color: white;
+  font-weight: bold;
 }
 
 #slide-menu > ul li a{
@@ -186,8 +187,8 @@
 }
 
   #slide-menu > ul li a:hover{
-    background-color: #7bcde5;
-    color: #454545;
+    background-color: rgba(252,254,255, 0.3);
+    font-weight: bold;
   }
 
   #slide-menu > ul li:before {
@@ -218,8 +219,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 60px;
     overflow: scroll;
+    overflow-x: scroll;
     background: #fcfeff;
     border-radius: 0;
     -moz-box-sizing: border-box;
@@ -232,44 +233,35 @@
     -webkit-transition: all 300ms;
     transition: all 300ms;
   }
-  #main-content div.menu-trigger {
+ .menu-trigger {
     position: fixed;
     top: 10px;
-    left: 10px;
     width: 36px;
     height: 36px;
-    background: #dfe5eb;
     cursor: pointer;
     border-radius: 5px;
-    -moz-transition: all 300ms;
-    -webkit-transition: all 300ms;
-    transition: all 300ms;
+    background: #fcfeff;
   }
 
-  #main-content div.menu-trigger .glyphicon{
+  .glyphicon{
     color: black;
     margin: 10px;
   }
 
-  #main-content div.menu-trigger:hover {
-    background: #2aadd3;
+  .glyphicon:hover {
+    color: grey;
   }
 
-  #main-content div.menu-trigger .glyphicon:hover {
-    color: white;
-  }
-
-  #main-content div.menu-trigger:hover:before {
+  .menu-trigger:hover:before {
     color: #fcfeff;
   }
 
   body.menu-active #main-content {
     left: 284px;
     border-radius: 7px 0 0 7px;
+    overflow: scroll;
+    overflow-x: scroll;
   }
 
-  body.menu-active #main-content .menu-trigger {
-    left: 294px;
-  }
 
 }

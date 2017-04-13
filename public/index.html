@@ -14,7 +14,7 @@
 	<!-- personalCSSfile -->
 	<link href="stylesheets/style.css" rel="stylesheet" type="text/css">
 	<link href="stylesheets/navbar.css" rel="stylesheet" type="text/css">
-	<link href="stylesheets/rotateFlower.css" rel="stylesheet" type="text/css">
+	<link href="stylesheets/dashboard.css" rel="stylesheet" type="text/css">
 	<link href="stylesheets/contactStyle.css" rel="stylesheet" type="text/css">
 	<base href="/">
 </head>
@@ -24,27 +24,32 @@
 		<nav id="slide-menu">
 	        <ul>
 	            <li class="titlebrand">Traffic Monitoring</li>
-	            <li>
-	                <a href="/" class="active">Map<!-- <span class="glyphicon glyphicon-dashboard pull-right"></span> --></a>
+	            <li ng-class="{'active': $route.current.activetab == 'home'}">
+	                <a href="home">Map</a>
 	            </li>
-	            <li>
-	                <a href="/history">History <!-- <span class="glyphicon glyphicon-star pull-right"></span> --></a>
-	            </li>
-				<li>
-					<a href="/hotspot">Hotspot </a>
+				<li ng-class="{'active': $route.current.activetab == 'hotspot'}">
+					<a href="hotspot">Hotspot </a>
 				</li>
-	            <li>
-	                <a href="/help">Help <!-- <span class="glyphicon glyphicon-question-sign pull-right"></span> --></a>
+				<li ng-class="{'active': $route.current.activetab == 'history'}">
+	                <a href="history">History</a>
 	            </li>
-	            <li>
-	                <a href="/contact">Contact <!-- <span class="glyphicon glyphicon-envelope pull-right"></span> --></a>
-	            </li>                    
+	            
+	            <li ng-class="{'active': $route.current.activetab == 'userupload'}">
+	                <a href="userupload">Upload</a>
+	            </li>     
+	            <li ng-class="{'active': $route.current.activetab == 'help'}">
+	                <a href="help">Help</a>
+	            </li>
+	            <li ng-class="{'active': $route.current.activetab == 'contact'}">
+	                <a href="contact">Contact</a>
+	            </li>                 
 	        </ul>  
 		</nav>
 		<div id="main-content">
-	        <div class="menu-trigger">
-	        	<div class="glyphicon glyphicon-menu-hamburger"></div>
-	        </div>
+	    	<div class="menu-trigger">
+        		<div class="glyphicon glyphicon-menu-hamburger"></div>
+        	</div>
+	        
         	<!-- render templates according to different routes-->
 	        <ng-view></ng-view>
 	    </div>   
@@ -64,9 +69,10 @@
 	<script src="javascripts/MainCtrl.js"></script>
 	<script src="javascripts/HisCtrl.js"></script>
 	<script src="javascripts/HspCtrl.js"></script>
+	<script src="javascripts/UsrUpldCtrl.js"></script>
 
 	<!-- Google Maps API -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiZIShFf_a93mqFiEJ4jSlkr4apswao-g&libraries=places"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiZIShFf_a93mqFiEJ4jSlkr4apswao-g&libraries=places,visualization"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
 	<script src="//rawgit.com/angular-ui/angular-google-maps/2.1.5/dist/angular-google-maps.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>

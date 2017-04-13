@@ -2,21 +2,12 @@
  
 <div class="content">
 	<div class="row">
-            <!-- map -->
-            <div class="col-md-8 col-sm-12 col-xs-12">
-				<div id="map">
-					<ui-gmap-google-map center='map.center' zoom='map.zoom' id='maps'>
-						<ui-gmap-marker
-								coords="marker.coords"
-								options="marker.options"
-								events="marker.events"
-								idkey="marker.id">
-						</ui-gmap-marker>
-					</ui-gmap-google-map>
-				</div>
-            </div>
             <!-- form -->
-            <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-title">
+                    <label style="padding-bottom:5px">Please fill in the form</label>
+                </div>
             	<form class="form-horizontal" style="padding: 40px">
 					<div class="form-group">
 						<label for="origin">Origin:</label>
@@ -61,16 +52,49 @@
 					    <button class="btn btn-info" ng-click="update()">Submit</button>
 					</div>	
       			</form>
+      			<!-- <div ng-show="isPanelSet == true">
+                    <label style="padding:5px">Suggestions</label>
+                </div> -->
+      			</div>
             </div>
+            <!-- map -->
+            <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-title">
+                    <label style="padding-bottom:5px">Map</label>
+                </div>
+				<div id="map">
+					<ui-gmap-google-map center='map.center' zoom='map.zoom' id='maps'>
+						<!-- <ui-gmap-marker
+								coords="marker.coords"
+								options="marker.options"
+								events="marker.events"
+								idkey="marker.id">
+						</ui-gmap-marker> -->
+					</ui-gmap-google-map>
+					</div>
+				</div>
+            </div>
+            
 	</div>
 	<div class="row">
-		<div class="col-md-6 col-xs-12">
-			<label style="padding-bottom:5px">Traffic pattern along the specific route:</label>
-			<canvas class="chart chart-line" chart-data="chartdata1" chart-labels="labels1"></canvas> 
+	
+	<div class="col-xs-12 col-sm-12 col-md-4" ng-show="isPanelSet == true">
+    	<div class="card">
+            <div class="card-title">
+                <label style="padding-bottom:5px">Direction</label>
+            </div>
+            <div id="right-panel" style="overflow-y: scroll;height: 390px;">{{setPanel}}</div>
+        </div>
+    </div>
+    <!-- <div ng-class="isPanelSet == true? 'col-md-8 col-sm-12 col-xs-12':'col-md-12 col-sm-12 col-xs-12'">
+		<div class="card">
+            <div class="card-title">
+                <label style="padding-bottom:5px" ng-show="isPanelSet == false">Traffic pattern for all area in NJ:</label>
+                <label style="padding-bottom:5px" ng-show="isPanelSet == true">Traffic patterns along all routes:</label>
+            </div>			
+			<canvas class="chart chart-line" chart-data="chartdata1" chart-labels="labels1" chart-series="series"></canvas> 
 		</div>
-		<div class="col-md-6 col-xs-12">
-			<label style="padding-bottom:5px">Traffic pattern for selected location: {{pin.location}}</label>
-			<canvas class="chart chart-line" chart-data="chartdata2" chart-labels="labels2"></canvas>
-		</div>
-	</div>
+	</div> -->
+    </div>
 </div>

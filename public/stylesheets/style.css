@@ -6,10 +6,25 @@ body, html {
     font-weight: 100;
 }
 
+.content {
+	padding: 34px;
+    overflow: scroll;
+}
+
+ng-view {
+	padding-left: 10px;
+	padding-top: 10px;
+    overflow: scroll;
+}
+
 .angular-google-map-container {
     height: 400px;
 }
 
-.row{
-    padding: 30px;
+.row {
+	margin-bottom: 20px;
+}
+
+.active {
+    background-color: rgba(252,254,255, 0.3);
 }
