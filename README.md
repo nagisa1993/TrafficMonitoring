@@ -1,6 +1,7 @@
 # TrafficMonitoring
 
 A website to retrieve historic traffic pattern over certain areas, provide statistics about traffic severity levels and offering detour suggestion to user choosen driving route based on A* algorithm using historic traffic pattern as heuristic.
+![alt tag](/public/images/TrafficMonitoring_web_screenshot.jpeg)
 
 
 ## Before Starting
